@@ -6,7 +6,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="description" content="Công cụ tự chèn logo DPCS" />
+    <meta name="description" content="Công cụ tự chèn logo ĐPCS" />
     <meta name="author" content="Phoenixcoded" />
 </head>
 
@@ -215,42 +215,13 @@ async function changeMarkType(event) {
     }
 }
 async function preloadResource() {
-    //logo cũ
-    // window.wmTop = new Image();
-    // window.wmBottom = new Image();
-    // window.wmLogo = new Image();
-    // window.wmWebsite = new Image();
-    // window.wmName = new Image();
-    // window.wmHotline = new Image();
-    // window.wmLogo2 = new Image();
-    // window.wmBottom2 = new Image();
-    // window.wmCenter2 = new Image();
-    // window.wmHotline2 = new Image();
-    // wmTop.src = "DPCS/top.png";
-    // wmBottom.src = "DPCS/bottom.png";
-    // wmLogo.src = "DPCS/logo.png";
-    // wmWebsite.src = "DPCS/website.png";
-    // wmName.src = "DPCS/name.png";
-    // wmHotline.src = "DPCS/hotline.png";
-    // wmLogo2.src = "DPCS/logo2.png";
-    // wmBottom2.src = "DPCS/bottom2.png";
-    // wmCenter2.src = "DPCS/center2.png";
-    // wmHotline2.src = "DPCS/hotline2.png"
-    // await Promise.all([wmTop.decode(), wmBottom.decode(), wmLogo.decode(), wmWebsite.decode(), wmName.decode(), wmHotline.decode()]);
-    // //logo mới
-    window.wmLeft = new Image();
-    window.wmRight = new Image();
     window.wmLogo = new Image();
     window.wmCenter = new Image();
-    window.wmCenter1 = new Image();
     window.wmNumber = new Image();
-    wmLeft.src = "DPCS/nleft.png";
-    wmRight.src = "DPCS/nright.png";
-    wmLogo.src = "DPCS/nlogo.png";
-    wmCenter.src = "DPCS/ncenter.png";
-    wmCenter1.src = "DPCS/ncenter1.png";
-    wmNumber.src = "DPCS/nnumber.png";
-    await Promise.all([wmLeft.decode(), wmRight.decode(), wmLogo.decode(), wmCenter.decode(), wmCenter1.decode(), wmNumber.decode()]);
+    wmLogo.src = "DPCS/logon.png";
+    wmCenter.src = "DPCS/centern.png";
+    wmNumber.src = "DPCS/sdtn.png";
+    await Promise.all([wmLogo.decode(), wmCenter.decode(), wmNumber.decode()]);
 }
 async function drawImage(filename, imageObjectURL) {
     var mark_type = $('#sl-mark-type')[0].value;
@@ -307,40 +278,15 @@ async function markImage(imageObjectURL, mark_type) {
     canvas.width = image.width * scale_ratio;
     canvas.height = image.height * scale_ratio;
     context.drawImage(image, 0, 0, canvas.width, canvas.height);
-
-    // console.log(await getImageBrightness(canvas, canvas.width - canvas.width / 2 - fix_size * 0.3 * wmscale_ratio / 2, canvas.height - canvas.height / 2 - wmCenter.height / wmCenter.width * fix_size * 0.3 * wmscale_ratio / 2, fix_size * 0.3 * wmscale_ratio, wmCenter.height / wmCenter.width * fix_size * 0.3 * wmscale_ratio));
-    // if (mark_type == 1) {
-    //     context.drawImage(wmTop, 0, 0, canvas.width, wmTop.height * (isheight ? canvas.width / wmTop.width : canvas.height / wmTop.width));
-    //     context.drawImage(wmBottom, 0, canvas.height - (isheight ? wmBottom.height * canvas.width / wmBottom.width : wmBottom.height * canvas.height / wmBottom.width), canvas.width, isheight ? wmBottom.height * canvas.width / wmBottom.width : wmBottom.height * canvas.height / wmBottom.width);
-    //     context.drawImage(wmLogo, 0, 0, canvas.width * 0.25 * (isheight ? 1 : canvas.height / canvas.width), canvas.width * 0.25 * wmLogo.height / wmLogo.width * (isheight ? 1 : canvas.height / canvas.width));
-    //     context.drawImage(wmWebsite, 20 * 0.4 * (isheight ? 1 : canvas.height / canvas.width), canvas.height - (isheight ? wmWebsite.height * canvas.width / wmWebsite.width : wmWebsite.height * canvas.height / wmWebsite.width) / 2 - canvas.width * 0.4 * wmWebsite.height / wmWebsite.width * (isheight ? 1 : canvas.height / canvas.width) / 6, canvas.width * 0.4 * (isheight ? 1 : canvas.height / canvas.width), canvas.width * 0.4 * wmWebsite.height / wmWebsite.width * (isheight ? 1 : canvas.height / canvas.width));
-    //     context.drawImage(wmName, canvas.width - 20 * 0.4 * (isheight ? 1 : canvas.height / canvas.width) - canvas.width * 0.4 * (isheight ? 1 : canvas.height / canvas.width), (isheight ? wmName.height * canvas.width / wmName.width : wmName.height * canvas.height / wmName.width) / 16 - canvas.width * 0.4 * wmName.height / wmName.width * (isheight ? 1 : canvas.height / canvas.width) / 16, canvas.width * 0.4 * (isheight ? 1 : canvas.height / canvas.width), canvas.width * 0.4 * wmName.height / wmName.width * (isheight ? 1 : canvas.height / canvas.width));
-    //     context.drawImage(wmHotline, canvas.width - 20 * 0.4 * (isheight ? 1 : canvas.height / canvas.width) - canvas.width * 0.4 * (isheight ? 1 : canvas.height / canvas.width), canvas.height - (isheight ? wmHotline.height * canvas.width / wmHotline.width : wmHotline.height * canvas.height / wmHotline.width) / 1.5 - canvas.width * 0.4 * wmHotline.height / wmHotline.width * (isheight ? 1 : canvas.height / canvas.width) / 1.5, canvas.width * 0.4 * (isheight ? 1 : canvas.height / canvas.width), canvas.width * 0.4 * wmHotline.height / wmHotline.width * (isheight ? 1 : canvas.height / canvas.width));
-    // }else if (mark_type == 2) {
-
-    // } else {
-    //     context.drawImage(wmLogo2, canvas.width * 0.01, 0, canvas.width * 0.216 * (isheight ? 1 : canvas.height / canvas.width), canvas.width * 0.216 * wmLogo2.height / wmLogo2.width * (isheight ? 1 : canvas.height / canvas.width));
-    //     context.drawImage(wmBottom2, 0, canvas.height - (isheight ? wmBottom2.height * canvas.width / wmBottom2.width : wmBottom2.height * canvas.height / wmBottom2.width), canvas.width, isheight ? wmBottom2.height * canvas.width / wmBottom2.width : wmBottom2.height * canvas.height / wmBottom2.width);
-    //     context.drawImage(wmCenter2, canvas.width - canvas.width / 2 - fix_size * 0.3 * wmscale_ratio / 2, canvas.height - canvas.height / 2 - wmCenter2.height / wmCenter2.width * fix_size * 0.3 * wmscale_ratio / 2, fix_size * 0.3 * wmscale_ratio, wmCenter2.height / wmCenter2.width * fix_size * 0.3 * wmscale_ratio);
-    //     context.drawImage(wmHotline2, canvas.width - fix_size * 0.46, canvas.height - fix_size / 9 - fix_size * 0.5 * wmHotline2.height/wmHotline2.width/2, fix_size * 0.45, fix_size * 0.45 * wmHotline2.height/wmHotline2.width);
-    // }
-    
-    // var brightness = await getImageBrightness(canvas, canvas.width - canvas.width / 2 - fix_size * 0.3 * wmscale_ratio / 2, canvas.height - canvas.height / 2 - wmCenter.height / wmCenter.width * fix_size * 0.3 * wmscale_ratio / 2, fix_size * 0.3 * wmscale_ratio, wmCenter.height / wmCenter.width * fix_size * 0.3 * wmscale_ratio);
-    // if (brightness < 8){
-    // context.drawImage(wmCenter, canvas.width - canvas.width / 2 - fix_size * 0.3 * wmscale_ratio / 2, canvas.height - canvas.height / 2 - wmCenter.height / wmCenter.width * fix_size * 0.3 * wmscale_ratio / 2, fix_size * 0.3 * wmscale_ratio, wmCenter.height / wmCenter.width * fix_size * 0.3 * wmscale_ratio);
-    // }else {   
-    // context.drawImage(wmCenter2, canvas.width - canvas.width / 2 - fix_size * 0.3 * wmscale_ratio / 2, canvas.height - canvas.height / 2 - wmCenter2.height / wmCenter2.width * fix_size * 0.3 * wmscale_ratio / 2, fix_size * 0.3 * wmscale_ratio, wmCenter2.height / wmCenter2.width * fix_size * 0.3 * wmscale_ratio);
-    // }
-
+    // không logo ẩn ở giữa
     if (mark_type == 3){
         context.drawImage(wmLogo, 0, 0, canvas.width * 0.3 * (isheight ? 1 : canvas.height / canvas.width), canvas.width * 0.3 * wmLogo.height / wmLogo.width * (isheight ? 1 : canvas.height / canvas.width));
-        context.drawImage(wmCenter, canvas.width - canvas.width / 2 - fix_size * 0.3 * wmscale_ratio / 2, canvas.height - canvas.height / 2 - wmCenter.height / wmCenter.width * fix_size * 0.3 * wmscale_ratio / 2, fix_size * 0.3 * wmscale_ratio, wmCenter.height / wmCenter.width * fix_size * 0.3 * wmscale_ratio);
         context.drawImage(wmNumber, canvas.width - 20 * 0.4 * (isheight ? 1 : canvas.height / canvas.width) - canvas.width * 0.4 * (isheight ? 1 : canvas.height / canvas.width), canvas.height - ((isheight ? wmNumber.height * canvas.width / wmNumber.width : wmNumber.height * canvas.height / wmNumber.width)+50)*0.4, canvas.width * 0.4 * (isheight ? 1 : canvas.height / canvas.width), canvas.width * 0.4 * wmNumber.height / wmNumber.width * (isheight ? 1 : canvas.height / canvas.width));
     }
     if (mark_type == 0){
         context.drawImage(wmLogo, 0, 0, canvas.width * 0.3 * (isheight ? 1 : canvas.height / canvas.width), canvas.width * 0.3 * wmLogo.height / wmLogo.width * (isheight ? 1 : canvas.height / canvas.width));
-        context.drawImage(wmCenter1, canvas.width - canvas.width / 2 - fix_size / 2, canvas.height - canvas.height / 2 - wmCenter1.height / wmCenter1.width * fix_size / 2, fix_size, wmCenter1.height / wmCenter1.width * fix_size);
-        context.drawImage(wmNumber, canvas.width - 20 * 0.4 * (isheight ? 1 : canvas.height / canvas.width) - canvas.width * 0.4 * (isheight ? 1 : canvas.height / canvas.width), canvas.height - ((isheight ? wmNumber.height * canvas.width / wmNumber.width : wmNumber.height * canvas.height / wmNumber.width)+50)*0.4, canvas.width * 0.4 * (isheight ? 1 : canvas.height / canvas.width), canvas.width * 0.4 * wmNumber.height / wmNumber.width * (isheight ? 1 : canvas.height / canvas.width));
+        context.drawImage(wmCenter, canvas.width - canvas.width / 2 - fix_size / 2, canvas.height - canvas.height / 2, fix_size, wmCenter.height / wmCenter.width * fix_size);
+        context.drawImage(wmNumber, canvas.width - 20 * 0.4 * (isheight ? 1 : canvas.height / canvas.width) - canvas.width * 0.4 * (isheight ? 1 : canvas.height / canvas.width), canvas.height - ((isheight ? wmNumber.height * canvas.width / wmNumber.width : wmNumber.height * canvas.height / wmNumber.width))*0.4, canvas.width * 0.4 * (isheight ? 1 : canvas.height / canvas.width), canvas.width * 0.4 * wmNumber.height / wmNumber.width * (isheight ? 1 : canvas.height / canvas.width));
     }
     return canvas;
 }
