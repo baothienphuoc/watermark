@@ -20,7 +20,6 @@
                     <select class="form-select" aria-label="Default select example" id="sl-mark-type" onclick="changeMarkType(event)">
                         <option selected value="0">Mặc định</option>
                         <!-- <option value="1">Cũ</option> -->
-                        <option value="3">Logo ẩn ở giữa</option>
                         <option value="200">K chèn</option>
                     </select>
                 </div>
@@ -268,7 +267,7 @@ async function markImage(imageObjectURL, mark_type) {
 
     var isheight = image.width < image.height ? true : false;
     var base_size = isheight ? image.width : image.height;//
-    var scale_ratio = image.width < 600 || image.height < 600 ? 600 / base_size : 1;//tăng kích thước hình ảnh nếu hình ảnh nhỏ hơn 600
+    var scale_ratio = base_size < 600 ? 600 / base_size : base_size > 2000 ? 2000 / base_size : 1;//tăng kích thước hình ảnh nếu hình ảnh nhỏ hơn 600
     var frame_ratio = isheight ? image.height / image.width : image.width / image.width;
     var wmscale_ratio = frame_ratio;
     var fix_size = scale_ratio * base_size;//chiều ngắn nhất của hình ảnh
@@ -278,15 +277,10 @@ async function markImage(imageObjectURL, mark_type) {
     canvas.width = image.width * scale_ratio;
     canvas.height = image.height * scale_ratio;
     context.drawImage(image, 0, 0, canvas.width, canvas.height);
-    // không logo ẩn ở giữa
-    if (mark_type == 3){
-        context.drawImage(wmLogo, 0, 0, canvas.width * 0.3 * (isheight ? 1 : canvas.height / canvas.width), canvas.width * 0.3 * wmLogo.height / wmLogo.width * (isheight ? 1 : canvas.height / canvas.width));
-        context.drawImage(wmNumber, canvas.width - 20 * 0.4 * (isheight ? 1 : canvas.height / canvas.width) - canvas.width * 0.4 * (isheight ? 1 : canvas.height / canvas.width), canvas.height - ((isheight ? wmNumber.height * canvas.width / wmNumber.width : wmNumber.height * canvas.height / wmNumber.width))*0.4, canvas.width * 0.4 * (isheight ? 1 : canvas.height / canvas.width), canvas.width * 0.4 * wmNumber.height / wmNumber.width * (isheight ? 1 : canvas.height / canvas.width));
-    }
     if (mark_type == 0){
-        context.drawImage(wmLogo, 0, 0, canvas.width * 0.3 * (isheight ? 1 : canvas.height / canvas.width), canvas.width * 0.3 * wmLogo.height / wmLogo.width * (isheight ? 1 : canvas.height / canvas.width));
-        context.drawImage(wmCenter, canvas.width - canvas.width / 2 - fix_size / 2, canvas.height - canvas.height / 2, fix_size, wmCenter.height / wmCenter.width * fix_size);
-        context.drawImage(wmNumber, canvas.width - 20 * 0.4 * (isheight ? 1 : canvas.height / canvas.width) - canvas.width * 0.4 * (isheight ? 1 : canvas.height / canvas.width), canvas.height - ((isheight ? wmNumber.height * canvas.width / wmNumber.width : wmNumber.height * canvas.height / wmNumber.width))*0.4, canvas.width * 0.4 * (isheight ? 1 : canvas.height / canvas.width), canvas.width * 0.4 * wmNumber.height / wmNumber.width * (isheight ? 1 : canvas.height / canvas.width));
+        context.drawImage(wmLogo, canvas.width - canvas.width * 0.22 * (isheight ? 1 : canvas.height / canvas.width), 0, canvas.width * 0.22 * (isheight ? 1 : canvas.height / canvas.width), canvas.width * 0.22 * wmLogo.height / wmLogo.width * (isheight ? 1 : canvas.height / canvas.width));
+        context.drawImage(wmCenter, canvas.width - canvas.width / 2 - fix_size / 2, canvas.height - canvas.height / 2.27, fix_size, wmCenter.height / wmCenter.width * fix_size);
+        context.drawImage(wmNumber, 20 * 0.4 * (isheight ? 1 : canvas.height / canvas.width), canvas.height - (isheight ? wmNumber.height * canvas.width / wmNumber.width : wmNumber.height * canvas.height / wmNumber.width)*0.5, canvas.width * 0.4 * (isheight ? 1 : canvas.height / canvas.width), canvas.width * 0.4 * wmNumber.height / wmNumber.width * (isheight ? 1 : canvas.height / canvas.width));
     }
     return canvas;
 }
