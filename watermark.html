@@ -25,6 +25,7 @@
                       <option value="0817801111">0817801111</option>
                       <option value="0774194444">0774194444</option>
                       <option value="0898168338">0898168338</option>
+                      <option value="0859784444">0859784444</option>
                     </select>
                 </div>
                 <div>
@@ -262,6 +263,7 @@ async function preloadResource() {
     window.wm0817801111 = new Image();
     window.wm0774194444 = new Image();
     window.wm0898168338 = new Image();
+    window.wm0859784444 = new Image();
     wmCu.src = "AT247/watermark aothun247-o1.png";
     wmLogoGiua.src = "AT247/logogiua.png";
     wmLogoGoc.src = "AT247/logogoc.png";
@@ -270,7 +272,8 @@ async function preloadResource() {
     wm0817801111.src = "AT247/wm0817801111.png";
     wm0774194444.src = "AT247/wm0774194444.png";
     wm0898168338.src = "AT247/wm0898168338.png";
-    await Promise.all([wmCu.decode(), wmLogoGiua.decode(), wmLogoGoc.decode(), wm0919604444.decode(), wm0836344444.decode(), wm0817801111.decode(), wm0774194444.decode(), wm0898168338.decode()]);
+    wm0859784444.src = "AT247/wm0859784444.png";
+    await Promise.all([wmCu.decode(), wmLogoGiua.decode(), wmLogoGoc.decode(), wm0919604444.decode(), wm0836344444.decode(), wm0817801111.decode(), wm0774194444.decode(), wm0898168338.decode(), wm0859784444.decode()]);
 }
 async function markImage(imageObjectURL, mark_type){
     // console.log(e);
@@ -307,6 +310,9 @@ async function markImage(imageObjectURL, mark_type){
             break;
         case "0898168338":
             context.drawImage(wm0898168338, (canvas.width - fix_size) / 2, (canvas.height - fix_size) / 2, fix_size, fix_size);
+            break;
+        case "0859784444":
+            context.drawImage(wm0859784444, (canvas.width - fix_size) / 2, (canvas.height - fix_size) / 2, fix_size, fix_size);
             break;
         default:
             context.drawImage(wmLogoGiua, canvas.width * 0.37 - fix_size * 0.20, canvas.height * 0.4  - wmLogoGiua.height / wmLogoGiua.width * fix_size *  0.19, fix_size * 0.38, wmLogoGiua.height / wmLogoGiua.width * fix_size * 0.38);
