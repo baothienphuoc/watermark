@@ -23,6 +23,7 @@
                       <option value="2">Nha Khoa</option>
                       <option value="3">Hồng</option>
                       <option value="4">0813866868</option>
+                      <option value="0844371111">0844 37 1111</option>
                       <option value="5">0837 97 4444</option>
                       <option value="6">0522 18 7777</option>
                       <option value="7">0961 88 7777</option>
@@ -233,11 +234,13 @@ async function preloadResource() {
     window.wmLogoNhan = new Image();
     window.wmLogoMi = new Image();
     window.wmLogo0961887777 = new Image();
+    window.wmLogo0844371111 = new Image();
     window.wm0838344444 = new Image();
     window.wm0813866868 = new Image();
     window.wm0837974444 = new Image();
     window.wm0522187777 = new Image();
     window.wm0961887777 = new Image();
+    window.wm0844371111 = new Image();
     wmBottom.src = "TT/bottom.png";
     wmLogo.src = "TT/logo.png";
     wmLogo1.src = "TT/logon1.png";
@@ -253,12 +256,14 @@ async function preloadResource() {
     wmLogoNhan.src = "TT/logonhan.png";
     wmLogoMi.src = "TT/logomi.png";
     wmLogo0961887777.src = "TT/logo0961887777.png";
+    wmLogo0844371111.src = "TT/logo0844371111.png";
     wm0838344444.src = "TT/083 834 4444.png";
     wm0813866868.src = "TT/0813 86 6868.png";
     wm0837974444.src = "TT/083 797 4444.png";
     wm0522187777.src = "TT/0522 18 7777.png";
     wm0961887777.src = "TT/0961887777.png";
-    await Promise.all([wmBottom.decode(), wmLogo.decode(), wmLogo1.decode(), wmHotline.decode(), wmCenter.decode(), wmCenter2.decode(), wmLogoBottom.decode(), wmLogoBottom1.decode(), wmLogoBottom2.decode(), wmNhaKhoa.decode(), wmLogoHong.decode(), wmLogoMin.decode(), wmLogoNhan.decode(), wmLogoMi.decode(), wm0838344444.decode(), wm0813866868.decode(), wm0837974444.decode(), wm0522187777.decode(), wmLogo0961887777.decode(), wm0961887777.decode()]);
+    wm0844371111.src = "TT/0844371111.png";
+    await Promise.all([wmBottom.decode(), wmLogo.decode(), wmLogo1.decode(), wmHotline.decode(), wmCenter.decode(), wmCenter2.decode(), wmLogoBottom.decode(), wmLogoBottom1.decode(), wmLogoBottom2.decode(), wmNhaKhoa.decode(), wmLogoHong.decode(), wmLogoMin.decode(), wmLogoNhan.decode(), wmLogoMi.decode(), wm0838344444.decode(), wm0813866868.decode(), wm0837974444.decode(), wm0522187777.decode(), wmLogo0961887777.decode(), wm0961887777.decode(), wmLogo0844371111.decode(), wm0844371111.decode()]);
 }
 async function drawImage(filename, imageObjectURL) {
     var mark_type = $('#sl-mark-type')[0].value;
@@ -344,6 +349,9 @@ async function markImage(imageObjectURL, mark_type){
         }else if (mark_type == 7){//0961887777
             context.drawImage(wmLogo0961887777, fix_size * 0.01 * wmscale_ratio, 0, canvas.width * 0.25 * (isheight ? 1 : canvas.height / canvas.width), canvas.width * 0.25 * wmLogo0961887777.height / wmLogo0961887777.width * (isheight ? 1 : canvas.height / canvas.width));
             context.drawImage(wm0961887777, canvas.width * 0.05, canvas.height - fix_size / 20 - fix_size * 0.4 * wm0961887777.height/wm0961887777.width/2, fix_size * 0.4, fix_size * 0.4 * wm0961887777.height/wm0961887777.width);
+        }else if (mark_type == '0844371111'){
+            context.drawImage(wmLogo0844371111, fix_size * 0.01 * wmscale_ratio, 0, canvas.width * 0.25 * (isheight ? 1 : canvas.height / canvas.width), canvas.width * 0.25 * wmLogo0844371111.height / wmLogo0844371111.width * (isheight ? 1 : canvas.height / canvas.width));
+            context.drawImage(wm0844371111, canvas.width * 0.05, canvas.height - fix_size / 20 - fix_size * 0.4 * wm0844371111.height/wm0844371111.width/2, fix_size * 0.4, fix_size * 0.4 * wm0844371111.height/wm0844371111.width);
         }else {
             context.drawImage(wmLogo, 0, 0, canvas.width * 0.25 * (isheight ? 1 : canvas.height / canvas.width), canvas.width * 0.25 * wmLogo.height / wmLogo.width * (isheight ? 1 : canvas.height / canvas.width));
             context.drawImage(wmHotline, canvas.width * 0.05, canvas.height - fix_size / 20 - fix_size * 0.4 * wmHotline.height/wmHotline.width/2, fix_size * 0.4, fix_size * 0.4 * wmHotline.height/wmHotline.width);
