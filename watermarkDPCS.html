@@ -220,7 +220,13 @@ async function preloadResource() {
     wmLogo.src = "DPCS/logon.png";
     wmCenter.src = "DPCS/centern.png";
     wmNumber.src = "DPCS/sdtn.png";
-    await Promise.all([wmLogo.decode(), wmCenter.decode(), wmNumber.decode()]);
+    window.wmLogobtp = new Image();
+    window.wmCenterbtp = new Image();
+    window.wmNumberbtp = new Image();
+    wmLogobtp.src = "DPCS/logobtp.png";
+    wmCenterbtp.src = "DPCS/centerbtp.png";
+    wmNumberbtp.src = "DPCS/sdtbtp.png";
+    await Promise.all([wmLogo.decode(), wmCenter.decode(), wmNumber.decode(), wmLogobtp.decode(), wmCenterbtp.decode(), wmNumberbtp.decode()]);
 }
 async function drawImage(filename, imageObjectURL) {
     var mark_type = $('#sl-mark-type')[0].value;
@@ -278,6 +284,22 @@ async function markImage(imageObjectURL, mark_type) {
     canvas.height = image.height * scale_ratio;
     context.drawImage(image, 0, 0, canvas.width, canvas.height);
     if (mark_type == 0){
+        //btp
+        //draw logobtp góc trên bên trái
+        context.drawImage(wmLogobtp, 0.11 * canvas.width * 0.20 * (isheight ? 1 : canvas.height / canvas.width), canvas.width * 0.20 * wmLogobtp.height / wmLogobtp.width * (isheight ? 1 : canvas.height / canvas.width) * 0.1, canvas.width * 0.20 * (isheight ? 1 : canvas.height / canvas.width), canvas.width * 0.20 * wmLogobtp.height / wmLogobtp.width * (isheight ? 1 : canvas.height / canvas.width));
+        //draw centerbtp dưới giữa 1 khoảng nhỏ
+        context.drawImage(wmCenterbtp, canvas.width - canvas.width / 2 - fix_size / 2, canvas.height - canvas.height / 2.27, fix_size, wmCenterbtp.height / wmCenterbtp.width * fix_size);
+        //draw sdtbtp góc dưới bên phải, sdt phóng to x2
+        if (isheight){
+            context.drawImage(wmNumberbtp, canvas.width - canvas.width * 0.33 * (isheight ? 1 : canvas.height / canvas.width), canvas.height - canvas.height * 0.1 * (isheight ? 1 : canvas.height / canvas.width), canvas.width * 0.33 * (isheight ? 1 : canvas.height / canvas.width), canvas.width * 0.33 * wmNumberbtp.height / wmNumberbtp.width * (isheight ? 1 : canvas.height / canvas.width));
+        }
+        else{
+            context.drawImage(wmNumberbtp, canvas.width - canvas.width * 0.35 * (isheight ? 1 : canvas.height / canvas.width), canvas.height - canvas.height * 0.23 * (isheight ? 1 : canvas.height / canvas.width), canvas.width * 0.35 * (isheight ? 1 : canvas.height / canvas.width), canvas.width * 0.35 * wmNumberbtp.height / wmNumberbtp.width * (isheight ? 1 : canvas.height / canvas.width));
+        }
+
+
+    }
+    if (mark_type == 1){
         context.drawImage(wmLogo, canvas.width - canvas.width * 0.22 * (isheight ? 1 : canvas.height / canvas.width), 0, canvas.width * 0.22 * (isheight ? 1 : canvas.height / canvas.width), canvas.width * 0.22 * wmLogo.height / wmLogo.width * (isheight ? 1 : canvas.height / canvas.width));
         context.drawImage(wmCenter, canvas.width - canvas.width / 2 - fix_size / 2, canvas.height - canvas.height / 2.27, fix_size, wmCenter.height / wmCenter.width * fix_size);
         context.drawImage(wmNumber, 20 * 0.4 * (isheight ? 1 : canvas.height / canvas.width), canvas.height - (isheight ? wmNumber.height * canvas.width / wmNumber.width : wmNumber.height * canvas.height / wmNumber.width)*0.5, canvas.width * 0.4 * (isheight ? 1 : canvas.height / canvas.width), canvas.width * 0.4 * wmNumber.height / wmNumber.width * (isheight ? 1 : canvas.height / canvas.width));
