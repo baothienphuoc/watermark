@@ -19,14 +19,13 @@
                     <input type="file" name="product-image-upload" id="product-image-upload" accept=".jpeg, .jpg, .png, .webp" multiple />
                     <select class="form-select" aria-label="Default select example" id="sl-mark-type" onchange="changeMarkType(event)">
                       <option selected value="0">Mặc định</option>
-                      <option value="1">Khách Sạn</option>
-                      <option value="2">Nha Khoa</option>
+                      <!-- <option value="1">Khách Sạn</option>
+                      <option value="2">Nha Khoa</option> -->
                       <option value="3">Hồng</option>
-                      <option value="4">0813866868</option>
-                      <option value="0844371111">0844 37 1111</option>
-                      <option value="5">0837 97 4444</option>
-                      <option value="6">0522 18 7777</option>
-                      <option value="7">0961 88 7777</option>
+                      <option value="0813866868">0813866868</option>
+                      <option value="0844371111">0844371111</option>
+                      <option value="0837974444">0837974444</option>
+                      <option value="0522187777">0522187777</option>
                     </select>
                 </div>
                 <div>
@@ -219,51 +218,73 @@ async function changeMarkType(event){
         }
 }
 async function preloadResource() {
-    window.wmBottom = new Image();
-    window.wmLogo = new Image();
-    window.wmLogo1 = new Image();
-    window.wmHotline = new Image();
-    window.wmCenter = new Image();
-    window.wmCenter2 = new Image();
-    window.wmLogoBottom = new Image();
-    window.wmLogoBottom1 = new Image();
-    window.wmLogoBottom2 = new Image();
-    window.wmNhaKhoa = new Image();
-    window.wmLogoHong = new Image();
-    window.wmLogoMin = new Image();
-    window.wmLogoNhan = new Image();
-    window.wmLogoMi = new Image();
-    window.wmLogo0961887777 = new Image();
-    window.wmLogo0844371111 = new Image();
-    window.wm0838344444 = new Image();
-    window.wm0813866868 = new Image();
-    window.wm0837974444 = new Image();
-    window.wm0522187777 = new Image();
-    window.wm0961887777 = new Image();
-    window.wm0844371111 = new Image();
-    wmBottom.src = "TT/bottom.png";
-    wmLogo.src = "TT/logo.png";
-    wmLogo1.src = "TT/logon1.png";
-    wmHotline.src = "TT/sdt.png";
-    wmCenter.src = "TT/center.png";
-    wmCenter2.src = "TT/center2.png";
-    wmLogoBottom.src = "TT/logobottom.png";
-    wmLogoBottom1.src = "TT/logobottomn1.png";
-    wmLogoBottom2.src = "TT/hl2.png";
-    wmNhaKhoa.src = "TT/nhakhoa.png";
-    wmLogoHong.src = "TT/logohong.png";
-    wmLogoMin.src = "TT/logomin.png";
-    wmLogoNhan.src = "TT/logonhan.png";
-    wmLogoMi.src = "TT/logomi.png";
-    wmLogo0961887777.src = "TT/logo0961887777.png";
-    wmLogo0844371111.src = "TT/logo0844371111.png";
-    wm0838344444.src = "TT/083 834 4444.png";
-    wm0813866868.src = "TT/0813 86 6868.png";
-    wm0837974444.src = "TT/083 797 4444.png";
-    wm0522187777.src = "TT/0522 18 7777.png";
-    wm0961887777.src = "TT/0961887777.png";
-    wm0844371111.src = "TT/0844371111.png";
-    await Promise.all([wmBottom.decode(), wmLogo.decode(), wmLogo1.decode(), wmHotline.decode(), wmCenter.decode(), wmCenter2.decode(), wmLogoBottom.decode(), wmLogoBottom1.decode(), wmLogoBottom2.decode(), wmNhaKhoa.decode(), wmLogoHong.decode(), wmLogoMin.decode(), wmLogoNhan.decode(), wmLogoMi.decode(), wm0838344444.decode(), wm0813866868.decode(), wm0837974444.decode(), wm0522187777.decode(), wmLogo0961887777.decode(), wm0961887777.decode(), wmLogo0844371111.decode(), wm0844371111.decode()]);
+    // window.wmBottom = new Image();
+    // window.wmLogo = new Image();
+    // window.wmLogo1 = new Image();
+    // window.wmHotline = new Image();
+    // window.wmCenter = new Image();
+    // window.wmCenter2 = new Image();
+    // window.wmLogoBottom = new Image();
+    // window.wmLogoBottom1 = new Image();
+    // window.wmLogoBottom2 = new Image();
+    // window.wmNhaKhoa = new Image();
+    // window.wmLogoHong = new Image();
+    // window.wmLogoMin = new Image();
+    // window.wmLogoNhan = new Image();
+    // window.wmLogoMi = new Image();
+    // window.wmLogo0961887777 = new Image();
+    // window.wmLogo0844371111 = new Image();
+    // window.wm0838344444 = new Image();
+    // window.wm0813866868 = new Image();
+    // window.wm0837974444 = new Image();
+    // window.wm0522187777 = new Image();
+    // window.wm0961887777 = new Image();
+    // window.wm0844371111 = new Image();
+    // wmBottom.src = "TT/bottom.png";
+    // wmLogo.src = "TT/logo.png";
+    // wmLogo1.src = "TT/logon1.png";
+    // wmHotline.src = "TT/sdt.png";
+    // wmCenter.src = "TT/center.png";
+    // wmCenter2.src = "TT/center2.png";
+    // wmLogoBottom.src = "TT/logobottom.png";
+    // wmLogoBottom1.src = "TT/logobottomn1.png";
+    // wmLogoBottom2.src = "TT/hl2.png";
+    // wmNhaKhoa.src = "TT/nhakhoa.png";
+    // wmLogoHong.src = "TT/logohong.png";
+    // wmLogoMin.src = "TT/logomin.png";
+    // wmLogoNhan.src = "TT/logonhan.png";
+    // wmLogoMi.src = "TT/logomi.png";
+    // wmLogo0961887777.src = "TT/logo0961887777.png";
+    // wmLogo0844371111.src = "TT/logo0844371111.png";
+    // wm0838344444.src = "TT/083 834 4444.png";
+    // wm0813866868.src = "TT/0813 86 6868.png";
+    // wm0837974444.src = "TT/083 797 4444.png";
+    // wm0522187777.src = "TT/0522 18 7777.png";
+    // wm0961887777.src = "TT/0961887777.png";
+    // wm0844371111.src = "TT/0844371111.png";
+    // await Promise.all([wmBottom.decode(), wmLogo.decode(), wmLogo1.decode(), wmHotline.decode(), wmCenter.decode(), wmCenter2.decode(), wmLogoBottom.decode(), wmLogoBottom1.decode(), wmLogoBottom2.decode(), wmNhaKhoa.decode(), wmLogoHong.decode(), wmLogoMin.decode(), wmLogoNhan.decode(), wmLogoMi.decode(), wm0838344444.decode(), wm0813866868.decode(), wm0837974444.decode(), wm0522187777.decode(), wmLogo0961887777.decode(), wm0961887777.decode(), wmLogo0844371111.decode(), wm0844371111.decode()]);
+
+    window.wmCentern = new Image();
+    window.wmLogon = new Image();
+    window.wm0927687777n = new Image();
+    window.wm0522187777n = new Image();
+    window.wm0813866868n = new Image();
+    window.wm0842554444n = new Image();
+    window.wm0838344444n = new Image();
+    window.wm0844371111n = new Image();
+
+    wmCentern.src = "TT/centern.png";
+    wmLogon.src = "TT/logo.png";
+    wm0927687777n.src = "TT/n0927687777.png";
+    wm0838344444n.src = "TT/n0838344444.png";
+    wm0522187777n.src = "TT/n0522187777.png";
+    wm0813866868n.src = "TT/n0813866868.png";
+    wm0842554444n.src = "TT/n0842554444.png";
+    wm0844371111n.src = "TT/n0844371111.png";
+
+    await Promise.all([wmCentern.decode(), wmLogon.decode(), wm0927687777n.decode(), wm0522187777n.decode(), wm0813866868n.decode(), wm0842554444n.decode(), wm0838344444n.decode(), wm0844371111n.decode()]);
+
+
 }
 async function drawImage(filename, imageObjectURL) {
     var mark_type = $('#sl-mark-type')[0].value;
@@ -321,48 +342,30 @@ async function markImage(imageObjectURL, mark_type){
     canvas.height = image.height * scale_ratio;
     context.drawImage(image, 0, 0, canvas.width, canvas.height);
 
-    // console.log(await getImageBrightness(canvas, canvas.width - canvas.width / 2 - fix_size * 0.3 * wmscale_ratio / 2, canvas.height - canvas.height / 2 - wmCenter.height / wmCenter.width * fix_size * 0.3 * wmscale_ratio / 2, fix_size * 0.3 * wmscale_ratio, wmCenter.height / wmCenter.width * fix_size * 0.3 * wmscale_ratio));
-    if (mark_type == 1){//khách sạn
-        context.drawImage(wmLogo1, fix_size * 0.01 * wmscale_ratio, fix_size * 0.003 * wmscale_ratio, fix_size * 0.33 * wmscale_ratio, wmLogo1.height / wmLogo1.width * fix_size * 0.33 * wmscale_ratio); //lấy tỉ lê h/w * với chiều rộng hiện tại là ra chiều cao
-        context.drawImage(wmLogoBottom1, canvas.width - fix_size * 0.35 * wmscale_ratio, canvas.height - fix_size * 0.02 * wmscale_ratio - wmLogoBottom1.height / wmLogoBottom1.width * fix_size * 0.33 * wmscale_ratio, fix_size * 0.33 * wmscale_ratio, wmLogoBottom1.height / wmLogoBottom1.width * fix_size * 0.33 * wmscale_ratio);
+    let wmNumber = null;
+    if (mark_type == 3){//hong
+        wmNumber = wm0838344444n;
+    }else if (mark_type == "0813866868"){//min wm0813866868n
+        wmNumber = wm0813866868n;
+    }else if (mark_type == "0844371111"){//nhan wm0842554444n
+        wmNumber = wm0842554444n;
+    }else if (mark_type == "0522187777"){//mi wm0522187777n
+        wmNumber = wm0522187777n;
+    }else if (mark_type == "0844371111"){
+        wmNumber = wm0844371111n;
+    }else {
+        wmNumber = wm0927687777n;
     }
-    else if (mark_type == 2){//nha khoa
-        context.drawImage(wmLogo1, fix_size * 0.01 * wmscale_ratio, fix_size * 0.003 * wmscale_ratio, fix_size * 0.33 * wmscale_ratio, wmLogo1.height / wmLogo1.width * fix_size * 0.33 * wmscale_ratio); //lấy tỉ lê h/w * với chiều rộng hiện tại là ra chiều cao
-        context.drawImage(wmLogoBottom2, canvas.width - fix_size * 0.33 * wmscale_ratio, canvas.height - wmLogoBottom2.height / wmLogoBottom2.width * fix_size * 0.33 * wmscale_ratio, fix_size * 0.33 * wmscale_ratio, wmLogoBottom2.height / wmLogoBottom2.width * fix_size * 0.33 * wmscale_ratio);
-        context.drawImage(wmNhaKhoa, fix_size * 0.01 * wmscale_ratio, canvas.height - wmNhaKhoa.height / wmNhaKhoa.width * fix_size * 0.33 * wmscale_ratio, fix_size * 0.33 * wmscale_ratio, wmNhaKhoa.height / wmNhaKhoa.width * fix_size * 0.33 * wmscale_ratio);
+    
+    let ratioHeightWidth = isheight ? 1 : canvas.height / canvas.width;
+    if (isheight){
+        context.drawImage(wmNumber, canvas.width - canvas.width * 0.42 * ratioHeightWidth, canvas.height - canvas.height * 0.01 * ratioHeightWidth -  canvas.width * 0.38 * wmNumber.height / wmNumber.width * ratioHeightWidth, canvas.width * 0.38 * ratioHeightWidth, canvas.width * 0.38 * wmNumber.height / wmNumber.width * ratioHeightWidth);
     }
-    else {
-        context.drawImage(wmBottom, 0, canvas.height - (isheight ? wmBottom.height * canvas.width / wmBottom.width : wmBottom.height * canvas.height / wmBottom.width), canvas.width, (isheight ? wmBottom.height * canvas.width / wmBottom.width : wmBottom.height * canvas.height / wmBottom.width));
-        context.drawImage(wmLogoBottom, canvas.width - canvas.width * 0.15 - fix_size * 0.25  / 2, canvas.height - fix_size / 12 - fix_size * 0.3  / 2, fix_size * 0.25 , fix_size * 0.25  * wmLogoBottom.height/wmLogoBottom.width);
-        if (mark_type == 3){//hong
-            context.drawImage(wmLogoHong, fix_size * 0.01 * wmscale_ratio, 0, canvas.width * 0.25 * (isheight ? 1 : canvas.height / canvas.width), canvas.width * 0.25 * wmLogoHong.height / wmLogoHong.width * (isheight ? 1 : canvas.height / canvas.width));
-            context.drawImage(wm0838344444, canvas.width * 0.05, canvas.height - fix_size / 20 - fix_size * 0.4 * wm0838344444.height/wm0838344444.width/2, fix_size * 0.4, fix_size * 0.4 * wm0838344444.height/wm0838344444.width);
-        }else if (mark_type == 4){//min
-            context.drawImage(wmLogoMin, fix_size * 0.01 * wmscale_ratio, 0, canvas.width * 0.25 * (isheight ? 1 : canvas.height / canvas.width), canvas.width * 0.25 * wmLogoMin.height / wmLogoMin.width * (isheight ? 1 : canvas.height / canvas.width));
-            context.drawImage(wm0813866868, canvas.width * 0.05, canvas.height - fix_size / 20 - fix_size * 0.4 * wm0813866868.height/wm0813866868.width/2, fix_size * 0.4, fix_size * 0.4 * wm0813866868.height/wm0813866868.width);
-        }else if (mark_type == 5){//nhan
-            context.drawImage(wmLogoNhan, fix_size * 0.01 * wmscale_ratio, 0, canvas.width * 0.25 * (isheight ? 1 : canvas.height / canvas.width), canvas.width * 0.25 * wmLogoNhan.height / wmLogoNhan.width * (isheight ? 1 : canvas.height / canvas.width));
-            context.drawImage(wm0837974444, canvas.width * 0.05, canvas.height - fix_size / 20 - fix_size * 0.4 * wm0837974444.height/wm0837974444.width/2, fix_size * 0.4, fix_size * 0.4 * wm0837974444.height/wm0837974444.width);
-        }else if (mark_type == 6){//mi
-            context.drawImage(wmLogoMi, fix_size * 0.01 * wmscale_ratio, 0, canvas.width * 0.25 * (isheight ? 1 : canvas.height / canvas.width), canvas.width * 0.25 * wmLogoMi.height / wmLogoMi.width * (isheight ? 1 : canvas.height / canvas.width));
-            context.drawImage(wm0522187777, canvas.width * 0.05, canvas.height - fix_size / 20 - fix_size * 0.4 * wm0522187777.height/wm0522187777.width/2, fix_size * 0.4, fix_size * 0.4 * wm0522187777.height/wm0522187777.width);
-        }else if (mark_type == 7){//0961887777
-            context.drawImage(wmLogo0961887777, fix_size * 0.01 * wmscale_ratio, 0, canvas.width * 0.25 * (isheight ? 1 : canvas.height / canvas.width), canvas.width * 0.25 * wmLogo0961887777.height / wmLogo0961887777.width * (isheight ? 1 : canvas.height / canvas.width));
-            context.drawImage(wm0961887777, canvas.width * 0.05, canvas.height - fix_size / 20 - fix_size * 0.4 * wm0961887777.height/wm0961887777.width/2, fix_size * 0.4, fix_size * 0.4 * wm0961887777.height/wm0961887777.width);
-        }else if (mark_type == '0844371111'){
-            context.drawImage(wmLogo0844371111, fix_size * 0.01 * wmscale_ratio, 0, canvas.width * 0.25 * (isheight ? 1 : canvas.height / canvas.width), canvas.width * 0.25 * wmLogo0844371111.height / wmLogo0844371111.width * (isheight ? 1 : canvas.height / canvas.width));
-            context.drawImage(wm0844371111, canvas.width * 0.05, canvas.height - fix_size / 20 - fix_size * 0.4 * wm0844371111.height/wm0844371111.width/2, fix_size * 0.4, fix_size * 0.4 * wm0844371111.height/wm0844371111.width);
-        }else {
-            context.drawImage(wmLogo, 0, 0, canvas.width * 0.25 * (isheight ? 1 : canvas.height / canvas.width), canvas.width * 0.25 * wmLogo.height / wmLogo.width * (isheight ? 1 : canvas.height / canvas.width));
-            context.drawImage(wmHotline, canvas.width * 0.05, canvas.height - fix_size / 20 - fix_size * 0.4 * wmHotline.height/wmHotline.width/2, fix_size * 0.4, fix_size * 0.4 * wmHotline.height/wmHotline.width);
-        }
+    else{
+        context.drawImage(wmNumber, canvas.width - canvas.width * 0.39 * ratioHeightWidth, canvas.height - canvas.height * 0.02 - canvas.width * 0.35 * wmNumber.height / wmNumber.width * ratioHeightWidth, canvas.width * 0.35 * ratioHeightWidth, canvas.width * 0.35 * wmNumber.height / wmNumber.width * ratioHeightWidth);
     }
-    // var brightness = await getImageBrightness(canvas, canvas.width - canvas.width / 2 - fix_size * 0.3 * wmscale_ratio / 2, canvas.height - canvas.height / 2 - wmCenter.height / wmCenter.width * fix_size * 0.3 * wmscale_ratio / 2, fix_size * 0.3 * wmscale_ratio, wmCenter.height / wmCenter.width * fix_size * 0.3 * wmscale_ratio);
-    // if (brightness < 8){
-        context.drawImage(wmCenter, canvas.width - canvas.width / 2 - fix_size * 0.3 * wmscale_ratio / 2, canvas.height - canvas.height / 2 - wmCenter.height / wmCenter.width * fix_size * 0.3 * wmscale_ratio / 2, fix_size * 0.3 * wmscale_ratio, wmCenter.height / wmCenter.width * fix_size * 0.3 * wmscale_ratio);
-    // }else {   
-        context.drawImage(wmCenter2, canvas.width - canvas.width / 2 - fix_size * 0.3 * wmscale_ratio / 2, canvas.height - canvas.height / 2 - wmCenter2.height / wmCenter2.width * fix_size * 0.3 * wmscale_ratio / 2, fix_size * 0.3 * wmscale_ratio, wmCenter2.height / wmCenter2.width * fix_size * 0.3 * wmscale_ratio);
-    // }
+    context.drawImage(wmLogon, 0.11 * canvas.width * 0.20 * ratioHeightWidth, canvas.width * 0.20 * wmLogon.height / wmLogon.width * ratioHeightWidth * 0.1, canvas.width * 0.20 * ratioHeightWidth, canvas.width * 0.20 * wmLogon.height / wmLogon.width * ratioHeightWidth);
+    context.drawImage(wmCentern, canvas.width - canvas.width / 2 - fix_size / 2, canvas.height - canvas.height / 2.8, fix_size, wmCentern.height / wmCentern.width * fix_size);
     return canvas;
 }
 async function getImageBrightness(image, startX, startY, widthI, heightI){
