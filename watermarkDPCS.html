@@ -20,6 +20,7 @@
                     <select class="form-select" aria-label="Default select example" id="sl-mark-type" onclick="changeMarkType(event)">
                         <option selected value="0">Mặc định</option>
                         <!-- <option value="1">Cũ</option> -->
+                        <option value="100">Không sdt</option>
                         <option value="200">K chèn</option>
                     </select>
                 </div>
@@ -297,6 +298,13 @@ async function markImage(imageObjectURL, mark_type) {
             context.drawImage(wmNumberbtp, canvas.width - canvas.width * 0.35 * (isheight ? 1 : canvas.height / canvas.width), canvas.height - canvas.height * 0.23 * (isheight ? 1 : canvas.height / canvas.width), canvas.width * 0.35 * (isheight ? 1 : canvas.height / canvas.width), canvas.width * 0.35 * wmNumberbtp.height / wmNumberbtp.width * (isheight ? 1 : canvas.height / canvas.width));
         }
 
+
+    }elseif (mark_type = 100){
+         //btp
+        //draw logobtp góc trên bên trái
+        context.drawImage(wmLogobtp, 0.11 * canvas.width * 0.20 * (isheight ? 1 : canvas.height / canvas.width), canvas.width * 0.20 * wmLogobtp.height / wmLogobtp.width * (isheight ? 1 : canvas.height / canvas.width) * 0.1, canvas.width * 0.20 * (isheight ? 1 : canvas.height / canvas.width), canvas.width * 0.20 * wmLogobtp.height / wmLogobtp.width * (isheight ? 1 : canvas.height / canvas.width));
+        //draw centerbtp dưới giữa 1 khoảng nhỏ
+        context.drawImage(wmCenterbtp, canvas.width - canvas.width / 2 - fix_size / 2, canvas.height - canvas.height / 2.27, fix_size, wmCenterbtp.height / wmCenterbtp.width * fix_size);
 
     }
     if (mark_type == 1){
