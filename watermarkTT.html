@@ -328,7 +328,6 @@ async function markImage(imageObjectURL, mark_type){
     var image = new Image();
     image.src = imageObjectURL;
     await image.decode();
-    
     var isheight = image.width < image.height ? true : false;
     var base_size = isheight ? image.width : image.height;
     var scale_ratio = image.width < 600 || image.height < 600 ? 600 / base_size : 1;
