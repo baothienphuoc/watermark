@@ -185,10 +185,10 @@ image_uploader.addEventListener('change', function(e) {
     if (extn == "gif" || extn == "png" || extn == "jpg" || extn == "jpeg") {
         if (typeof(FileReader) != "undefined") {
             //loop for each file selected for uploaded.
-            for (var i = 0; i < image_uploader.files.length; i++) {
+            for (var i = 0; i < this.files.length; i++) {
                 let URLObj = window.URL || window.webkitURL;
-                var imageObjectURL = URLObj.createObjectURL(image_uploader.files[i]);
-                drawImage("marked-" + image_uploader.files[i].name, imageObjectURL);
+                var imageObjectURL = URLObj.createObjectURL(this.files[i]);
+                drawImage("marked-" + this.files[i].name, imageObjectURL);
             };
         } else {
             alert("This browser does not support FileReader.");
@@ -254,7 +254,9 @@ async function drawImage(filename, imageObjectURL) {
     });
 
 }
+// Load 9 images
 async function preloadResource() {
+    // Create 9 image objects
     window.wmCu = new Image();
     window.wmLogoGiua = new Image();
     window.wmLogoGoc = new Image();
@@ -264,6 +266,7 @@ async function preloadResource() {
     window.wm0774194444 = new Image();
     window.wm0898168338 = new Image();
     window.wm0859784444 = new Image();
+    // Set the src attribute to load the image
     wmCu.src = "AT247/watermark aothun247-o1.png";
     wmLogoGiua.src = "AT247/logogiua.png";
     wmLogoGoc.src = "AT247/logogoc.png";
@@ -273,6 +276,7 @@ async function preloadResource() {
     wm0774194444.src = "AT247/wm0774194444.png";
     wm0898168338.src = "AT247/wm0898168338.png";
     wm0859784444.src = "AT247/wm0859784444.png";
+    // Decode the image
     await Promise.all([wmCu.decode(), wmLogoGiua.decode(), wmLogoGoc.decode(), wm0919604444.decode(), wm0836344444.decode(), wm0817801111.decode(), wm0774194444.decode(), wm0898168338.decode(), wm0859784444.decode()]);
 }
 async function markImage(imageObjectURL, mark_type){
