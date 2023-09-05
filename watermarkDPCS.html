@@ -19,6 +19,8 @@
                     <input type="file" name="product-image-upload" id="product-image-upload" accept=".jpeg, .jpg, .png, .webp" multiple />
                     <select class="form-select" aria-label="Default select example" id="sl-mark-type" onclick="changeMarkType(event)">
                         <option selected value="0">Mặc định</option>
+                        <option value="n0886112255">0886772255</option>
+                        <option value="n0937987654">0937987654</option>
                         <!-- <option value="1">Cũ</option> -->
                         <option value="100">Không sdt</option>
                         <option value="200">K chèn</option>
@@ -227,7 +229,10 @@ async function preloadResource() {
     wmLogobtp.src = "DPCS/logobtp.png";
     wmCenterbtp.src = "DPCS/centerbtp.png";
     wmNumberbtp.src = "DPCS/sdtbtp.png";
-    await Promise.all([wmLogo.decode(), wmCenter.decode(), wmNumber.decode(), wmLogobtp.decode(), wmCenterbtp.decode(), wmNumberbtp.decode()]);
+    wm0886772255.src = "DPCS/n0886112255.png";
+    wm0937987654.src = "DPCS/n0937987654.png";
+    wmNumberbtp.src = "DPCS/sdtbtp.png";
+    await Promise.all([wmLogo.decode(), wmCenter.decode(), wmNumber.decode(), wmLogobtp.decode(), wmCenterbtp.decode(), wmNumberbtp.decode(), wm0886772255.decode(), wm0937987654.decode()]);
 }
 async function drawImage(filename, imageObjectURL) {
     var mark_type = $('#sl-mark-type')[0].value;
@@ -295,7 +300,7 @@ async function markImage(imageObjectURL, mark_type) {
             context.drawImage(wmNumberbtp, canvas.width - canvas.width * 0.33 * (isheight ? 1 : canvas.height / canvas.width), canvas.height - canvas.height * 0.1 * (isheight ? 1 : canvas.height / canvas.width), canvas.width * 0.33 * (isheight ? 1 : canvas.height / canvas.width), canvas.width * 0.33 * wmNumberbtp.height / wmNumberbtp.width * (isheight ? 1 : canvas.height / canvas.width));
         }
         else{
-            context.drawImage(wmNumberbtp, canvas.width - canvas.width * 0.35 * (isheight ? 1 : canvas.height / canvas.width), canvas.height - canvas.height * 0.23 * (isheight ? 1 : canvas.height / canvas.width), canvas.width * 0.35 * (isheight ? 1 : canvas.height / canvas.width), canvas.width * 0.35 * wmNumberbtp.height / wmNumberbtp.width * (isheight ? 1 : canvas.height / canvas.width));
+            context.drawImage(wmNumberbtp, canvas.width - canvas.width * 0.35 * (isheight ? 1 : canvas.height / canvas.width), canvas.height - canvas.height * 0.15 * (isheight ? 1 : canvas.height / canvas.width), canvas.width * 0.35 * (isheight ? 1 : canvas.height / canvas.width), canvas.width * 0.35 * wmNumberbtp.height / wmNumberbtp.width * (isheight ? 1 : canvas.height / canvas.width));
         }
 
 
@@ -306,11 +311,31 @@ async function markImage(imageObjectURL, mark_type) {
         //draw centerbtp dưới giữa 1 khoảng nhỏ
         context.drawImage(wmCenterbtp, canvas.width - canvas.width / 2 - fix_size / 2, canvas.height - canvas.height / 2.27, fix_size, wmCenterbtp.height / wmCenterbtp.width * fix_size);
 
-    }
-    if (mark_type == 1){
+    }else if (mark_type == 1){
         context.drawImage(wmLogo, canvas.width - canvas.width * 0.22 * (isheight ? 1 : canvas.height / canvas.width), 0, canvas.width * 0.22 * (isheight ? 1 : canvas.height / canvas.width), canvas.width * 0.22 * wmLogo.height / wmLogo.width * (isheight ? 1 : canvas.height / canvas.width));
         context.drawImage(wmCenter, canvas.width - canvas.width / 2 - fix_size / 2, canvas.height - canvas.height / 2.27, fix_size, wmCenter.height / wmCenter.width * fix_size);
         context.drawImage(wmNumber, 20 * 0.4 * (isheight ? 1 : canvas.height / canvas.width), canvas.height - (isheight ? wmNumber.height * canvas.width / wmNumber.width : wmNumber.height * canvas.height / wmNumber.width)*0.5, canvas.width * 0.4 * (isheight ? 1 : canvas.height / canvas.width), canvas.width * 0.4 * wmNumber.height / wmNumber.width * (isheight ? 1 : canvas.height / canvas.width));
+    }else if (mark_type == 200){
+        //không chèn
+    } else{
+        //btp
+        //draw logobtp góc trên bên trái
+        context.drawImage(wmLogobtp, 0.11 * canvas.width * 0.20 * (isheight ? 1 : canvas.height / canvas.width), canvas.width * 0.20 * wmLogobtp.height / wmLogobtp.width * (isheight ? 1 : canvas.height / canvas.width) * 0.1, canvas.width * 0.20 * (isheight ? 1 : canvas.height / canvas.width), canvas.width * 0.20 * wmLogobtp.height / wmLogobtp.width * (isheight ? 1 : canvas.height / canvas.width));
+        //draw centerbtp dưới giữa 1 khoảng nhỏ
+        context.drawImage(wmCenterbtp, canvas.width - canvas.width / 2 - fix_size / 2, canvas.height - canvas.height / 2.27, fix_size, wmCenterbtp.height / wmCenterbtp.width * fix_size);
+        //draw sdtbtp góc dưới bên phải, sdt phóng to x2
+        let wmSdt = wmNumberbtp;
+        if (mark_type == 'n0886112255'){
+            wmSdt = wm0886772255;
+        }else if (mark_type == 'n0937987654'){
+            wmSdt = wm0937987654;
+        }
+        if (isheight){
+            context.drawImage(wmSdt, canvas.width - canvas.width * 0.33 * (isheight ? 1 : canvas.height / canvas.width), canvas.height - canvas.height * 0.1 * (isheight ? 1 : canvas.height / canvas.width), canvas.width * 0.33 * (isheight ? 1 : canvas.height / canvas.width), canvas.width * 0.33 * wmSdt.height / wmSdt.width * (isheight ? 1 : canvas.height / canvas.width));
+        }
+        else{
+            context.drawImage(wmSdt, canvas.width - canvas.width * 0.35 * (isheight ? 1 : canvas.height / canvas.width), canvas.height - canvas.height * 0.15 * (isheight ? 1 : canvas.height / canvas.width), canvas.width * 0.35 * (isheight ? 1 : canvas.height / canvas.width), canvas.width * 0.35 * wmSdt.height / wmSdt.width * (isheight ? 1 : canvas.height / canvas.width));
+        }
     }
     return canvas;
 }
