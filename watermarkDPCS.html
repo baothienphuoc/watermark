@@ -21,6 +21,7 @@
                         <option selected value="0">Mặc định</option>
                         <option value="n0886112255">0886772255</option>
                         <option value="n0937987654">0937987654</option>
+                        <option value="n0844733333">0844733333</option>
                         <!-- <option value="1">Cũ</option> -->
                         <option value="100">Không sdt</option>
                         <option value="200">K chèn</option>
@@ -226,13 +227,16 @@ async function preloadResource() {
     window.wmLogobtp = new Image();
     window.wmCenterbtp = new Image();
     window.wmNumberbtp = new Image();
+    window.wm0886772255 = new Image();
+    window.wm0937987654 = new Image();
+    window.wm0844733333 = new Image();
     wmLogobtp.src = "DPCS/logobtp.png";
     wmCenterbtp.src = "DPCS/centerbtp.png";
     wmNumberbtp.src = "DPCS/sdtbtp.png";
     wm0886772255.src = "DPCS/n0886112255.png";
     wm0937987654.src = "DPCS/n0937987654.png";
-    wmNumberbtp.src = "DPCS/sdtbtp.png";
-    await Promise.all([wmLogo.decode(), wmCenter.decode(), wmNumber.decode(), wmLogobtp.decode(), wmCenterbtp.decode(), wmNumberbtp.decode(), wm0886772255.decode(), wm0937987654.decode()]);
+    wm0844733333.src = "DPCS/n0844733333.png";
+    await Promise.all([wmLogo.decode(), wmCenter.decode(), wmNumber.decode(), wmLogobtp.decode(), wmCenterbtp.decode(), wmNumberbtp.decode(), wm0886772255.decode(), wm0937987654.decode(), wm0844733333.decode()]);
 }
 async function drawImage(filename, imageObjectURL) {
     var mark_type = $('#sl-mark-type')[0].value;
@@ -329,6 +333,8 @@ async function markImage(imageObjectURL, mark_type) {
             wmSdt = wm0886772255;
         }else if (mark_type == 'n0937987654'){
             wmSdt = wm0937987654;
+        }else if (mark_type == 'n0844733333'){
+            wmSdt = wm0844733333;
         }
         if (isheight){
             context.drawImage(wmSdt, canvas.width - canvas.width * 0.33 * (isheight ? 1 : canvas.height / canvas.width), canvas.height - canvas.height * 0.1 * (isheight ? 1 : canvas.height / canvas.width), canvas.width * 0.33 * (isheight ? 1 : canvas.height / canvas.width), canvas.width * 0.33 * wmSdt.height / wmSdt.width * (isheight ? 1 : canvas.height / canvas.width));
