@@ -23,9 +23,10 @@
                       <option value="2">Nha Khoa</option> -->
                       <option value="3">Hồng</option>
                       <option value="0813866868">0813866868</option>
-                      <option value="0844371111">0844371111</option>
+                      <option value="0842554444">0842554444</option>
                       <option value="0837974444">0837974444</option>
-                      <option value="0522187777">0522187777</option>
+                      <option value="0898168338">0898168338</option>
+                        <option value="0774194444">0774194444</option>
                     </select>
                 </div>
                 <div>
@@ -233,13 +234,7 @@ async function preloadResource() {
     // window.wmLogoNhan = new Image();
     // window.wmLogoMi = new Image();
     // window.wmLogo0961887777 = new Image();
-    // window.wmLogo0844371111 = new Image();
-    // window.wm0838344444 = new Image();
-    // window.wm0813866868 = new Image();
-    // window.wm0837974444 = new Image();
-    // window.wm0522187777 = new Image();
     // window.wm0961887777 = new Image();
-    // window.wm0844371111 = new Image();
     // wmBottom.src = "TT/bottom.png";
     // wmLogo.src = "TT/logo.png";
     // wmLogo1.src = "TT/logon1.png";
@@ -255,36 +250,30 @@ async function preloadResource() {
     // wmLogoNhan.src = "TT/logonhan.png";
     // wmLogoMi.src = "TT/logomi.png";
     // wmLogo0961887777.src = "TT/logo0961887777.png";
-    // wmLogo0844371111.src = "TT/logo0844371111.png";
-    // wm0838344444.src = "TT/083 834 4444.png";
-    // wm0813866868.src = "TT/0813 86 6868.png";
-    // wm0837974444.src = "TT/083 797 4444.png";
-    // wm0522187777.src = "TT/0522 18 7777.png";
     // wm0961887777.src = "TT/0961887777.png";
-    // wm0844371111.src = "TT/0844371111.png";
-    // await Promise.all([wmBottom.decode(), wmLogo.decode(), wmLogo1.decode(), wmHotline.decode(), wmCenter.decode(), wmCenter2.decode(), wmLogoBottom.decode(), wmLogoBottom1.decode(), wmLogoBottom2.decode(), wmNhaKhoa.decode(), wmLogoHong.decode(), wmLogoMin.decode(), wmLogoNhan.decode(), wmLogoMi.decode(), wm0838344444.decode(), wm0813866868.decode(), wm0837974444.decode(), wm0522187777.decode(), wmLogo0961887777.decode(), wm0961887777.decode(), wmLogo0844371111.decode(), wm0844371111.decode()]);
+    // await Promise.all([wmBottom.decode(), wmLogo.decode(), wmLogo1.decode(), wmHotline.decode(), wmCenter.decode(), wmCenter2.decode(), wmLogoBottom.decode(), wmLogoBottom1.decode(), wmLogoBottom2.decode(), wmNhaKhoa.decode(), wmLogoHong.decode(), wmLogoMin.decode(), wmLogoNhan.decode(), wmLogoMi.decode(), wmLogo0961887777.decode(), wm0961887777.decode()]);
 
     window.wmCentern = new Image();
     window.wmLogon = new Image();
     window.wm0927687777n = new Image();
-    window.wm0522187777n = new Image();
+    window.wm0838344444n = new Image();
     window.wm0813866868n = new Image();
     window.wm0842554444n = new Image();
-    window.wm0838344444n = new Image();
-    window.wm0844371111n = new Image();
+    window.wm0837974444n = new Image();
+    window.wm0898168338n = new Image();
+    window.wm0774194444n = new Image();
 
     wmCentern.src = "TT/centern.png";
     wmLogon.src = "TT/logo.png";
     wm0927687777n.src = "TT/n0927687777.png";
     wm0838344444n.src = "TT/n0838344444.png";
-    wm0522187777n.src = "TT/n0522187777.png";
     wm0813866868n.src = "TT/n0813866868.png";
     wm0842554444n.src = "TT/n0842554444.png";
-    wm0844371111n.src = "TT/n0844371111.png";
+    wm0837974444n.src = "TT/n0837974444.png";
+    wm0898168338n.src = "TT/n0898168338.png";
+    wm0774194444n.src = "TT/n0774194444.png";
 
-    await Promise.all([wmCentern.decode(), wmLogon.decode(), wm0927687777n.decode(), wm0522187777n.decode(), wm0813866868n.decode(), wm0842554444n.decode(), wm0838344444n.decode(), wm0844371111n.decode()]);
-
-
+    await Promise.all([wmCentern.decode(), wmLogon.decode(), wm0927687777n.decode(), wm0838344444n.decode(), wm0813866868n.decode(), wm0842554444n.decode(), wm0837974444n.decode(), wm0898168338n.decode(), wm0774194444n.decode()]);
 }
 async function drawImage(filename, imageObjectURL) {
     var mark_type = $('#sl-mark-type')[0].value;
@@ -346,12 +335,14 @@ async function markImage(imageObjectURL, mark_type){
         wmNumber = wm0838344444n;
     }else if (mark_type == "0813866868"){//min wm0813866868n
         wmNumber = wm0813866868n;
-    }else if (mark_type == "0844371111"){//nhan wm0842554444n
+    }else if (mark_type == "0842554444"){//nhan wm0842554444n
         wmNumber = wm0842554444n;
-    }else if (mark_type == "0522187777"){//mi wm0522187777n
-        wmNumber = wm0522187777n;
-    }else if (mark_type == "0844371111"){
-        wmNumber = wm0844371111n;
+    }else if (mark_type == "0898168338"){//mi wm0898168338n
+        wmNumber = wm0898168338n;
+    }else if (mark_type == "0837974444"){//n wm0837974444n
+        wmNumber = wm0837974444n;
+    }else if (mark_type == "0774194444"){//n wm0774194444n
+        wmNumber = wm0774194444n;
     }else {
         wmNumber = wm0927687777n;
     }
