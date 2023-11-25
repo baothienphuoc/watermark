@@ -27,6 +27,7 @@
                       <option value="0837974444">0837974444</option>
                       <option value="0898168338">0898168338</option>
                         <option value="0774194444">0774194444</option>
+                        <option value="0836344444">0836344444</option>
                     </select>
                 </div>
                 <div>
@@ -262,6 +263,7 @@ async function preloadResource() {
     window.wm0837974444n = new Image();
     window.wm0898168338n = new Image();
     window.wm0774194444n = new Image();
+    window.wm0836344444n = new Image();
 
     wmCentern.src = "TT/centern.png";
     wmLogon.src = "TT/logo.png";
@@ -272,8 +274,9 @@ async function preloadResource() {
     wm0837974444n.src = "TT/n0837974444.png";
     wm0898168338n.src = "TT/n0898168338.png";
     wm0774194444n.src = "TT/n0774194444.png";
+    wm0836344444n.src = "TT/n0836344444.png";
 
-    await Promise.all([wmCentern.decode(), wmLogon.decode(), wm0927687777n.decode(), wm0838344444n.decode(), wm0813866868n.decode(), wm0842554444n.decode(), wm0837974444n.decode(), wm0898168338n.decode(), wm0774194444n.decode()]);
+    await Promise.all([wmCentern.decode(), wmLogon.decode(), wm0927687777n.decode(), wm0838344444n.decode(), wm0813866868n.decode(), wm0842554444n.decode(), wm0837974444n.decode(), wm0898168338n.decode(), wm0774194444n.decode(), wm0836344444n.decode()]);
 }
 async function drawImage(filename, imageObjectURL) {
     var mark_type = $('#sl-mark-type')[0].value;
@@ -343,6 +346,8 @@ async function markImage(imageObjectURL, mark_type){
         wmNumber = wm0837974444n;
     }else if (mark_type == "0774194444"){//n wm0774194444n
         wmNumber = wm0774194444n;
+    }else if (mark_type == "0836344444"){//n wm0836344444n
+        wmNumber = wm0836344444n;
     }else {
         wmNumber = wm0927687777n;
     }
