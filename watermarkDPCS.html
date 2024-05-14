@@ -20,8 +20,7 @@
                     <select class="form-select" aria-label="Default select example" id="sl-mark-type" onclick="changeMarkType(event)">
                         <option selected value="0">Mặc định</option>
                         <option value="n0886112255">0886112255</option>
-                        <option value="n0937987654">0937987654</option>
-                        <option value="n0844733333">0844733333</option>
+                        <option value="n0931987654">0931987654</option>
                         <option value="n0844371111">0844371111</option>
                         <option value="n0825484444">0825484444</option>
                         <option value="n0783868668">0783868668</option>
@@ -231,8 +230,7 @@ async function preloadResource() {
     window.wmCenterbtp = new Image();
     window.wmNumberbtp = new Image();
     window.wm0886112255 = new Image();
-    window.wm0937987654 = new Image();
-    window.wm0844733333 = new Image();
+    window.wm0931987654 = new Image();
     window.wm0844371111 = new Image();
     window.wm0825484444 = new Image();
     window.wm0783868668 = new Image();
@@ -240,13 +238,12 @@ async function preloadResource() {
     wmCenterbtp.src = "DPCS/centerbtp.png";
     wmNumberbtp.src = "DPCS/sdtbtp.png";
     wm0886112255.src = "DPCS/n0886112255.png";
-    wm0937987654.src = "DPCS/n0937987654.png";
-    wm0844733333.src = "DPCS/n0844733333.png";
+    wm0931987654.src = "DPCS/n0931987654.png";
     wm0844371111.src = "DPCS/n0844371111.png";
     wm0825484444.src = "DPCS/n0825484444.png";
     wm0783868668.src = "DPCS/n0783868668.png";
 
-    await Promise.all([wmLogo.decode(), wmCenter.decode(), wmNumber.decode(), wmLogobtp.decode(), wmCenterbtp.decode(), wmNumberbtp.decode(), wm0886112255.decode(), wm0937987654.decode(), wm0844733333.decode(), wm0844371111.decode(), wm0825484444.decode(), wm0783868668.decode()]);
+    await Promise.all([wmLogo.decode(), wmCenter.decode(), wmNumber.decode(), wmLogobtp.decode(), wmCenterbtp.decode(), wmNumberbtp.decode(), wm0886112255.decode(), wm0931987654.decode(), wm0844371111.decode(), wm0825484444.decode(), wm0783868668.decode()]);
 }
 async function drawImage(filename, imageObjectURL) {
     var mark_type = $('#sl-mark-type')[0].value;
@@ -320,10 +317,8 @@ async function markImage(imageObjectURL, mark_type) {
         let wmSdt = wmNumberbtp;
         if (mark_type == 'n0886112255'){
             wmSdt = wm0886112255;
-        }else if (mark_type == 'n0937987654'){
-            wmSdt = wm0937987654;
-        }else if (mark_type == 'n0844733333'){
-            wmSdt = wm0844733333;
+        }else if (mark_type == 'n0931987654'){
+            wmSdt = wm0931987654;
         }else if (mark_type == 'n0844371111'){
             wmSdt = wm0844371111;
         }else if (mark_type == 'n0825484444'){
