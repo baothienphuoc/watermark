@@ -1,11 +1,3 @@
-
-
-*,
-*:after,
-*:before {
-    box-sizing: border-box;
-}
-
 body {
     font-family: "Inter", sans-serif;
     line-height: 1.5;
@@ -14,6 +6,7 @@ body {
     background-color: #f5f7fb;
     color: #4f5d7e;
     font-weight: 500;
+    margin: 0;
 }
 
 fieldset {
@@ -166,16 +159,15 @@ details {
 }
 
 
-
-.button {
-    background-color: forestgreen;
+/* button {
+    background-color: ;
     color: ghostwhite;
     padding: 10px;
     margin-bottom: 5px;
     display: inline-block;
     border-radius: 10px;
     width: 100px;
-}
+} */
 
 #btn-select-mode {
     background-color: white;

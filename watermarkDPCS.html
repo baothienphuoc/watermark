@@ -17,17 +17,25 @@
                 <div class="upload-btn-wrapper">
                     <button class="btn btn-primary" onclick="document.getElementById('product-image-upload').click();">Upload a file</button>
                     <input type="file" name="product-image-upload" id="product-image-upload" accept=".jpeg, .jpg, .png, .webp" multiple />
-                    <select class="form-select" aria-label="Default select example" id="sl-mark-type" onclick="changeMarkType(event)">
-                        <option selected value="0">Mặc định</option>
-                        <option value="n0886112255">0886112255</option>
-                        <option value="n0931987654">0931987654</option>
-                        <option value="n0844371111">0844371111</option>
-                        <option value="n0825484444">0825484444</option>
-                        <option value="n0783868668">0783868668</option>
-                        <!-- <option value="1">Cũ</option> -->
-                        <option value="100">Không sdt</option>
-                        <option value="200">K chèn</option>
-                    </select>
+                    <div style="display: flex; flex-direction: row; gap: 10px; align-items: center;">    
+                        <div>
+                            <label>Chọn SĐT</label>
+                            <select class="form-select" aria-label="Default select example" id="sl-mark-type" onclick="changeMarkType(event)">
+                                <option selected value="n0961887777">0961887777</option>
+                                <option value="n0886112255">0886112255</option>
+                                <option value="n0931987654">0931987654</option>
+                                <option value="n0844371111">0844371111</option>
+                                <option value="n0825484444">0825484444</option>
+                                <option value="n0783868668">0783868668</option>
+                                <!-- <option value="1">Cũ</option> -->
+                                <option value="100">Không sdt</option>
+                            </select>
+                        </div>
+                        <div style="display: flex; gap: 10px">
+                            <label for="cb-logo-left">Chèn logo góc trái</label>
+                            <input type="checkbox" id="cb-logo-left" checked>
+                        </div>
+                    </div>
                 </div>
                 <div>
                     <p>
@@ -38,8 +46,9 @@
                         <span style="color: brown;">Hãy đổi kiểu chèn sang kiểu khác nếu watermark làm hình ảnh bị rối mắt. Chọn hình ảnh cần đổi kiểu chèn sau đó đổi phần kiểu chèn.</span>
                     </p>
                     <!-- <button class="button" id="btn-select-mode" onclick="selectMode()">Select Mode</button> -->
-                    <button class="button" id="btn-select" onclick="selectAll()">Select All</button>
-                    <button class="button" id="btn-download" onclick="downloadImages()" style="display: none">Download</button>
+                    <button class="btn" id="btn-select" onclick="selectAll()">Select All</button>
+                    <button class="btn btn-primary" id="btn-download" onclick="downloadImages()" style="display: none">Download từng ảnh một</button>
+                    <button class="btn btn-secondary" id="btn-download-zip" onclick="downloadImagesZIP()" style="display: none">Download zip</button>
                 </div>
             </div>
             <div id="result">
@@ -183,7 +192,7 @@ image_uploader.addEventListener('change', function(e) {
     var imgPath = this.value;
     // console.log(this.files[0]);
     var extn = imgPath.substring(imgPath.lastIndexOf('.') + 1).toLowerCase();
-    if (extn == "gif" || extn == "png" || extn == "jpg" || extn == "jpeg") {
+    if (extn.match("jpg|jpeg|png|gif|webp")) {
         if (typeof(FileReader) != "undefined") {
             //loop for each file selected for uploaded.
             for (var i = 0; i < image_uploader.files.length; i++) {
@@ -220,15 +229,9 @@ async function changeMarkType(event) {
     }
 }
 async function preloadResource() {
-    window.wmLogo = new Image();
-    window.wmCenter = new Image();
-    window.wmNumber = new Image();
-    wmLogo.src = "DPCS/logon.png";
-    wmCenter.src = "DPCS/centern.png";
-    wmNumber.src = "DPCS/sdtn.png";
     window.wmLogobtp = new Image();
     window.wmCenterbtp = new Image();
-    window.wmNumberbtp = new Image();
+    window.wm0961887777 = new Image();
     window.wm0886112255 = new Image();
     window.wm0931987654 = new Image();
     window.wm0844371111 = new Image();
@@ -236,14 +239,14 @@ async function preloadResource() {
     window.wm0783868668 = new Image();
     wmLogobtp.src = "DPCS/logobtp.png";
     wmCenterbtp.src = "DPCS/centerbtp.png";
-    wmNumberbtp.src = "DPCS/sdtbtp.png";
+    wm0961887777.src = "DPCS/sdtbtp.png";
     wm0886112255.src = "DPCS/n0886112255.png";
     wm0931987654.src = "DPCS/n0931987654.png";
     wm0844371111.src = "DPCS/n0844371111.png";
     wm0825484444.src = "DPCS/n0825484444.png";
     wm0783868668.src = "DPCS/n0783868668.png";
 
-    await Promise.all([wmLogo.decode(), wmCenter.decode(), wmNumber.decode(), wmLogobtp.decode(), wmCenterbtp.decode(), wmNumberbtp.decode(), wm0886112255.decode(), wm0931987654.decode(), wm0844371111.decode(), wm0825484444.decode(), wm0783868668.decode()]);
+    await Promise.all([wmLogobtp.decode(), wmCenterbtp.decode(), wm0961887777.decode(), wm0886112255.decode(), wm0931987654.decode(), wm0844371111.decode(), wm0825484444.decode(), wm0783868668.decode()]);
 }
 async function drawImage(filename, imageObjectURL) {
     var mark_type = $('#sl-mark-type')[0].value;
@@ -300,39 +303,38 @@ async function markImage(imageObjectURL, mark_type) {
     canvas.width = image.width * scale_ratio;
     canvas.height = image.height * scale_ratio;
     context.drawImage(image, 0, 0, canvas.width, canvas.height);
-    if (mark_type == 1){
-        context.drawImage(wmLogo, canvas.width - canvas.width * 0.22 * (isheight ? 1 : canvas.height / canvas.width), 0, canvas.width * 0.22 * (isheight ? 1 : canvas.height / canvas.width), canvas.width * 0.22 * wmLogo.height / wmLogo.width * (isheight ? 1 : canvas.height / canvas.width));
-        context.drawImage(wmCenter, canvas.width - canvas.width / 2 - fix_size / 2, canvas.height - canvas.height / 2.27, fix_size, wmCenter.height / wmCenter.width * fix_size);
-        context.drawImage(wmNumber, 20 * 0.4 * (isheight ? 1 : canvas.height / canvas.width), canvas.height - (isheight ? wmNumber.height * canvas.width / wmNumber.width : wmNumber.height * canvas.height / wmNumber.width)*0.5, canvas.width * 0.4 * (isheight ? 1 : canvas.height / canvas.width), canvas.width * 0.4 * wmNumber.height / wmNumber.width * (isheight ? 1 : canvas.height / canvas.width));
-    }else if (mark_type == 200){
-        //không chèn
-    } else{
-        //btp
-        //draw logobtp góc trên bên trái
+    let isInsertLogo = $('#cb-logo-left')[0].checked;
+    if (isInsertLogo) {
         context.drawImage(wmLogobtp, 0.11 * canvas.width * 0.19 * (isheight ? 1 : canvas.height / canvas.width), canvas.width * 0.19 * wmLogobtp.height / wmLogobtp.width * (isheight ? 1 : canvas.height / canvas.width) * 0.1, canvas.width * 0.19 * (isheight ? 1 : canvas.height / canvas.width), canvas.width * 0.19 * wmLogobtp.height / wmLogobtp.width * (isheight ? 1 : canvas.height / canvas.width));
-        //draw centerbtp dưới giữa 1 khoảng nhỏ
-        context.drawImage(wmCenterbtp, canvas.width - canvas.width / 2 - fix_size / 2, canvas.height - canvas.height / 2.27, fix_size, wmCenterbtp.height / wmCenterbtp.width * fix_size);
-        //draw sdtbtp góc dưới bên phải, sdt phóng to x2
-        if (mark_type == 100) return canvas;
-        let wmSdt = wmNumberbtp;
-        if (mark_type == 'n0886112255'){
-            wmSdt = wm0886112255;
-        }else if (mark_type == 'n0931987654'){
-            wmSdt = wm0931987654;
-        }else if (mark_type == 'n0844371111'){
-            wmSdt = wm0844371111;
-        }else if (mark_type == 'n0825484444'){
-            wmSdt = wm0825484444;
-        }else if (mark_type == 'n0783868668'){
-            wmSdt = wm0783868668;
-        }
-        if (isheight){
-            context.drawImage(wmSdt, canvas.width - canvas.width * 0.33, canvas.height - canvas.width * 0.33 * wmSdt.height / wmSdt.width, canvas.width * 0.33, canvas.width * 0.33 * wmSdt.height / wmSdt.width);
-        }
-        else{
-            let ratiohw = canvas.height / canvas.width;
-            context.drawImage(wmSdt, canvas.width - canvas.width * 0.35 * ratiohw, canvas.height - canvas.width * 0.35 * wmSdt.height / wmSdt.width * ratiohw, canvas.width * 0.35 * ratiohw, canvas.width * 0.35 * wmSdt.height / wmSdt.width * ratiohw);
-        }
+    }
+    //btp
+    //draw logobtp góc trên bên trái
+    //draw centerbtp dưới giữa 1 khoảng nhỏ
+    context.drawImage(wmCenterbtp, canvas.width - canvas.width / 2 - fix_size / 2, canvas.height - canvas.height / 2.27, fix_size, wmCenterbtp.height / wmCenterbtp.width * fix_size);
+    //draw sdtbtp góc dưới bên phải, sdt phóng to x2
+    if (mark_type == 100) return canvas;
+    let wmSdt = null;
+    if (mark_type == 'n0961887777'){
+        wmSdt = wm0961887777;
+    }else if (mark_type == 'n0886112255'){
+        wmSdt = wm0886112255;
+    }else if (mark_type == 'n0931987654'){
+        wmSdt = wm0931987654;
+    }else if (mark_type == 'n0844371111'){
+        wmSdt = wm0844371111;
+    }else if (mark_type == 'n0825484444'){
+        wmSdt = wm0825484444;
+    }else if (mark_type == 'n0783868668'){
+        wmSdt = wm0783868668;
+    }
+    if (!wmSdt) return canvas;
+    
+    if (isheight){
+        context.drawImage(wmSdt, canvas.width - canvas.width * 0.35, canvas.height - canvas.width * 0.37 * wmSdt.height / wmSdt.width, canvas.width * 0.33, canvas.width * 0.33 * wmSdt.height / wmSdt.width);
+    }
+    else{
+        let ratiohw = canvas.height / canvas.width;
+        context.drawImage(wmSdt, canvas.width - canvas.width * 0.36 * ratiohw, canvas.height - canvas.width * 0.38 * wmSdt.height / wmSdt.width * ratiohw, canvas.width * 0.35 * ratiohw, canvas.width * 0.35 * wmSdt.height / wmSdt.width * ratiohw);
     }
     return canvas;
 }
@@ -390,8 +392,10 @@ function selectAll() {
     }
     if (links.length != 0) {
         document.getElementById('btn-download').style.display = "inline-block";
+        document.getElementById('btn-download-zip').style.display = "inline-block";
     } else {
         document.getElementById('btn-download').style.display = "none";
+        document.getElementById('btn-download-zip').style.display = "none";
     }
 }
 document.getElementById('result').addEventListener('click', function(e) {
@@ -413,14 +417,21 @@ document.getElementById('result').addEventListener('click', function(e) {
         links.push(childrenItem);
     }
     if (document.getElementsByClassName("thumbChecked").length == 0) {
+        document.getElementById('btn-download-zip').style.display = "none";
         document.getElementById('btn-download').style.display = "none";
     }
     if (document.getElementsByClassName("thumbChecked").length != 0) {
+        document.getElementById('btn-download-zip').style.display = "inline-block";
         document.getElementById('btn-download').style.display = "inline-block";
     }
 });
 
 function downloadImages() {
+    links.forEach(function(url, i) {
+        download1(url);
+    })
+}
+function downloadImagesZIP() {
     // console.log(links);
     var zip = new JSZip();
     var count = 0;
@@ -462,23 +473,23 @@ function downloadImages() {
             }
         });
     });
-    function download1(img) {
-        
-        let filename = img.getAttribute("download");
-        //creating an invisible element
-        var element = document.createElement('a');
-        element.setAttribute('href', img.src);
-        element.setAttribute('download', filename);
+}
+function download1(img) {
     
-        // Above code is equivalent to
-        // <a href="path of file" download="file name">
-        document.body.appendChild(element);
-    
-        //onClick property
-        element.click();
-    
-        document.body.removeChild(element);
-    }
+    let filename = img.getAttribute("download");
+    //creating an invisible element
+    var element = document.createElement('a');
+    element.setAttribute('href', img.src);
+    element.setAttribute('download', filename);
+
+    // Above code is equivalent to
+    // <a href="path of file" download="file name">
+    document.body.appendChild(element);
+
+    //onClick property
+    element.click();
+
+    document.body.removeChild(element);
 }
 </script>
 
