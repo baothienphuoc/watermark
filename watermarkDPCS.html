@@ -27,6 +27,8 @@
                                 <option value="n0844371111">0844371111</option>
                                 <option value="n0825484444">0825484444</option>
                                 <option value="n0783868668">0783868668</option>
+                                <option value="n0889821234">0889821234</option>
+                                <option value="n0835061234">0835061234</option>
                                 <!-- <option value="1">Cũ</option> -->
                                 <option value="100">Không sdt</option>
                             </select>
@@ -237,6 +239,8 @@ async function preloadResource() {
     window.wm0844371111 = new Image();
     window.wm0825484444 = new Image();
     window.wm0783868668 = new Image();
+    window.wm0889821234 = new Image();
+    window.wm0835061234 = new Image();
     wmLogobtp.src = "DPCS/logobtp.png";
     wmCenterbtp.src = "DPCS/centerbtp.png";
     wm0961887777.src = "DPCS/sdtbtp.png";
@@ -245,8 +249,10 @@ async function preloadResource() {
     wm0844371111.src = "DPCS/n0844371111.png";
     wm0825484444.src = "DPCS/n0825484444.png";
     wm0783868668.src = "DPCS/n0783868668.png";
+    wm0889821234.src = "DPCS/n0889821234.png";
+    wm0835061234.src = "DPCS/n0835061234.png";
 
-    await Promise.all([wmLogobtp.decode(), wmCenterbtp.decode(), wm0961887777.decode(), wm0886112255.decode(), wm0931987654.decode(), wm0844371111.decode(), wm0825484444.decode(), wm0783868668.decode()]);
+    await Promise.all([wmLogobtp.decode(), wmCenterbtp.decode(), wm0961887777.decode(), wm0886112255.decode(), wm0931987654.decode(), wm0844371111.decode(), wm0825484444.decode(), wm0783868668.decode(), wm0889821234.decode(), wm0835061234.decode()]);
 }
 async function drawImage(filename, imageObjectURL) {
     var mark_type = $('#sl-mark-type')[0].value;
@@ -326,6 +332,10 @@ async function markImage(imageObjectURL, mark_type) {
         wmSdt = wm0825484444;
     }else if (mark_type == 'n0783868668'){
         wmSdt = wm0783868668;
+    }else if (mark_type == 'n0889821234'){
+        wmSdt = wm0889821234;
+    }else if (mark_type == 'n0835061234'){
+        wmSdt = wm0835061234;
     }
     if (!wmSdt) return canvas;
     
