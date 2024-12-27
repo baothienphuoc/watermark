@@ -18,16 +18,21 @@
                     <button class="btn btn-primary" onclick="document.getElementById('product-image-upload').click();">Upload a file</button>
                     <input type="file" name="product-image-upload" id="product-image-upload" accept=".jpeg, .jpg, .png, .webp" multiple />
                     <select class="form-select" aria-label="Default select example" id="sl-mark-type" onchange="changeMarkType(event)">
-                      <option selected value="0">Mặc định</option>
-                      <!-- <option value="1">Khách Sạn</option>
-                      <option value="2">Nha Khoa</option> -->
-                      <option value="3">Hồng</option>
-                      <option value="0813866868">0813866868</option>
-                      <option value="0842554444">0842554444</option>
-                      <option value="0837974444">0837974444</option>
-                      <option value="0898168338">0898168338</option>
+                        <option selected value="0">Mặc định</option>
+                        <!-- <option value="1">Khách Sạn</option>
+                        <option value="2">Nha Khoa</option> -->
+                        <option value="0838344444">0838344444</option>
+                        <option value="0813866868">0813866868</option>
+                        <option value="0842554444">0842554444</option>
+                        <option value="0837974444">0837974444</option>
+                        <option value="0898168338">0898168338</option>
                         <option value="0774194444">0774194444</option>
                         <option value="0836344444">0836344444</option>
+                        <option value="0931987654">0931987654</option>
+                        <option value="0822931234">0822931234</option>
+                        <option value="0825484444">0825484444</option>
+                        <option value="0859784444">0859784444</option>
+                        <option value="0889821234">0889821234</option>
                     </select>
                 </div>
                 <div>
@@ -264,6 +269,11 @@ async function preloadResource() {
     window.wm0898168338n = new Image();
     window.wm0774194444n = new Image();
     window.wm0836344444n = new Image();
+    window.wm0931987654n = new Image();
+    window.wm0836344444n = new Image();
+    window.wm0836344444n = new Image();
+    window.wm0836344444n = new Image();
+    window.wm0836344444n = new Image();
 
     wmCentern.src = "TT/centern.png";
     wmLogon.src = "TT/logo.png";
@@ -275,8 +285,13 @@ async function preloadResource() {
     wm0898168338n.src = "TT/n0898168338.png";
     wm0774194444n.src = "TT/n0774194444.png";
     wm0836344444n.src = "TT/n0836344444.png";
+    wm0931987654n.src = "TT/n0931987654.png";
+    wm0822931234n.src = "TT/n0822931234.png";
+    wm0825484444n.src = "TT/n0825484444.png";
+    wm0859784444n.src = "TT/n0859784444.png";
+    wm0889821234n.src = "TT/n0889821234.png";
 
-    await Promise.all([wmCentern.decode(), wmLogon.decode(), wm0927687777n.decode(), wm0838344444n.decode(), wm0813866868n.decode(), wm0842554444n.decode(), wm0837974444n.decode(), wm0898168338n.decode(), wm0774194444n.decode(), wm0836344444n.decode()]);
+    await Promise.all([wmCentern.decode(), wmLogon.decode(), wm0927687777n.decode(), wm0838344444n.decode(), wm0813866868n.decode(), wm0842554444n.decode(), wm0837974444n.decode(), wm0898168338n.decode(), wm0774194444n.decode(), wm0836344444n.decode(), wm0931987654n.decode(), wm0822931234n.decode(), wm0825484444n.decode(), wm0859784444n.decode(), wm0889821234n.decode()]);
 }
 async function drawImage(filename, imageObjectURL) {
     var mark_type = $('#sl-mark-type')[0].value;
@@ -334,7 +349,7 @@ async function markImage(imageObjectURL, mark_type){
     context.drawImage(image, 0, 0, canvas.width, canvas.height);
 
     let wmNumber = null;
-    if (mark_type == 3){//hong
+    if (mark_type == "0838344444"){//0838344444
         wmNumber = wm0838344444n;
     }else if (mark_type == "0813866868"){//min wm0813866868n
         wmNumber = wm0813866868n;
@@ -348,6 +363,16 @@ async function markImage(imageObjectURL, mark_type){
         wmNumber = wm0774194444n;
     }else if (mark_type == "0836344444"){//n wm0836344444n
         wmNumber = wm0836344444n;
+    }else if (mark_type == "0931987654"){//n wm0836344444n
+        wmNumber = wm0822931234n;
+    }else if (mark_type == "0822931234"){//n wm0822931234n
+        wmNumber = wm0825484444n;
+    }else if (mark_type == "0825484444"){//n wm0825484444n
+        wmNumber = wm0859784444n;
+    }else if (mark_type == "0859784444"){//n wm0859784444n
+        wmNumber = wm0836344444n;
+    }else if (mark_type == "0889821234"){//n wm0889821234n
+        wmNumber = wm0889821234n;
     }else {
         wmNumber = wm0927687777n;
     }
