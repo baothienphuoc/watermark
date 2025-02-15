@@ -18,14 +18,6 @@
                     <button class="btn btn-primary" onclick="document.getElementById('product-image-upload').click();">Upload a file</button>
                     <input type="file" name="product-image-upload" id="product-image-upload" accept=".jpeg, .jpg, .png, .webp" multiple />
                     <select class="form-select" aria-label="Default select example" id="sl-mark-type" onchange="changeMarkType(event)">
-                      <option value="0">Mặc định</option>
-                      <option selected value="1">Cũ</option>
-                      <option value="0919604444">0919604444</option>
-                      <option value="0836344444">0836344444</option>
-                      <option value="0817801111">0817801111</option>
-                      <option value="0774194444">0774194444</option>
-                      <option value="0898168338">0898168338</option>
-                      <option value="0859784444">0859784444</option>
                     </select>
                 </div>
                 <div>
@@ -57,7 +49,6 @@
 <!-- Fontawesome -->
 <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.no-icons.min.css" rel="stylesheet">
 <link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
-<!-- <script src="https://sp.zalo.me/plugins/sdk.js"></script> -->
 <script src="//cdn.rawgit.com/satazor/SparkMD5/master/spark-md5.min.js"></script>
 <!-- fancybox -->
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
@@ -66,6 +57,25 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.js" integrity="sha512-j7/1CJweOskkQiS5RD9W8zhEG9D9vpgByNGxPIqkO5KrXrwyDAroM9aQ9w8J7oRqwxGyz429hPVk/zR6IOMtSA==" crossorigin="anonymous"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css" integrity="sha512-H9jrZiiopUdsLpg94A333EfumgUBpO9MdbxStdeITo+KEIMaNfHNvwyjjDJb+ERPaRS6DpyRlKbvPUasNItRyw==" crossorigin="anonymous" />
 <script type="text/javascript">
+    const watermarkTypes = [
+        { "text": "Mặc định", "value": "default", "src": "" },
+        { "text": "Cũ", "value": 1, default: true, "src": "AT247/watermark aothun247-o1.png" },
+        { "text": "0919604444", "value": "0919604444", "src": "AT247/wm0919604444.png" },
+        { "text": "0836344444", "value": "0836344444", "src": "AT247/wm0836344444.png" },
+        { "text": "0817801111", "value": "0817801111", "src": "AT247/wm0817801111.png" },
+        { "text": "0774194444", "value": "0774194444", "src": "AT247/wm0774194444.png" },
+        { "text": "0898168338", "value": "0898168338", "src": "AT247/wm0898168338.png" },
+        { "text": "0859784444", "value": "0859784444", "src": "AT247/wm0859784444.png" }
+    ];
+    selectMarkType = document.getElementById("sl-mark-type");
+    for (var i = 0; i < watermarkTypes.length; i++) {
+        var option = document.createElement("option");
+        option.text = watermarkTypes[i].text;
+        option.value = watermarkTypes[i].value;
+        option.selected = watermarkTypes[i].default;
+        selectMarkType.add(option);
+    }
+    
 var links = [];
 preloadResource();
 $(document).ready(function() {
@@ -252,28 +262,21 @@ async function drawImage(filename, imageObjectURL) {
 }
 // Load 9 images
 async function preloadResource() {
-    // Create 9 image objects
-    window.wmCu = new Image();
-    window.wmLogoGiua = new Image();
-    window.wmLogoGoc = new Image();
-    window.wm0919604444 = new Image();
-    window.wm0836344444 = new Image();
-    window.wm0817801111 = new Image();
-    window.wm0774194444 = new Image();
-    window.wm0898168338 = new Image();
-    window.wm0859784444 = new Image();
-    // Set the src attribute to load the image
-    wmCu.src = "AT247/watermark aothun247-o1.png";
+    // Create image objects
+    window.wmImages = [];
+    let wmLogoGiua = new Image();
+    let wmLogoGoc = new Image();
     wmLogoGiua.src = "AT247/logogiua.png";
     wmLogoGoc.src = "AT247/logogoc.png";
-    wm0919604444.src = "AT247/wm0919604444.png";
-    wm0836344444.src = "AT247/wm0836344444.png";
-    wm0817801111.src = "AT247/wm0817801111.png";
-    wm0774194444.src = "AT247/wm0774194444.png";
-    wm0898168338.src = "AT247/wm0898168338.png";
-    wm0859784444.src = "AT247/wm0859784444.png";
-    // Decode the image
-    await Promise.all([wmCu.decode(), wmLogoGiua.decode(), wmLogoGoc.decode(), wm0919604444.decode(), wm0836344444.decode(), wm0817801111.decode(), wm0774194444.decode(), wm0898168338.decode(), wm0859784444.decode()]);
+    window.wmImages["logoGiua"] = wmLogoGiua;
+    window.wmImages["logoGoc"] = wmLogoGoc;
+    watermarkTypes.filter(item => item.src).forEach((item, index) => {
+        let image = new Image();
+        image.src = item.src;
+        window.wmImages[item.value] = image;
+    })
+    // await Promise.all(window.wmImages.map(image => image.decode())); // không đợi cũng được miễn là không thao tác nhanh
+
 }
 async function markImage(imageObjectURL, mark_type){
     // console.log(e);
@@ -292,32 +295,11 @@ async function markImage(imageObjectURL, mark_type){
     canvas.width = image.width * scale_ratio;
     canvas.height = image.height * scale_ratio;
     context.drawImage(image, 0, 0, canvas.width, canvas.height);
-    switch (mark_type) {
-        case "1":
-            context.drawImage(wmCu, (canvas.width - fix_size) / 2, (canvas.height - fix_size) / 2, fix_size, fix_size);
-            break;
-        case "0919604444":
-            context.drawImage(wm0919604444, (canvas.width - fix_size) / 2, (canvas.height - fix_size) / 2, fix_size, fix_size);
-            break;
-        case "0836344444":
-            context.drawImage(wm0836344444, (canvas.width - fix_size) / 2, (canvas.height - fix_size) / 2, fix_size, fix_size);
-            break;
-        case "0817801111":
-            context.drawImage(wm0817801111, (canvas.width - fix_size) / 2, (canvas.height - fix_size) / 2, fix_size, fix_size);
-            break;
-        case "0774194444":
-            context.drawImage(wm0774194444, (canvas.width - fix_size) / 2, (canvas.height - fix_size) / 2, fix_size, fix_size);
-            break;
-        case "0898168338":
-            context.drawImage(wm0898168338, (canvas.width - fix_size) / 2, (canvas.height - fix_size) / 2, fix_size, fix_size);
-            break;
-        case "0859784444":
-            context.drawImage(wm0859784444, (canvas.width - fix_size) / 2, (canvas.height - fix_size) / 2, fix_size, fix_size);
-            break;
-        default:
-            context.drawImage(wmLogoGiua, canvas.width * 0.37 - fix_size * 0.20, canvas.height * 0.4  - wmLogoGiua.height / wmLogoGiua.width * fix_size *  0.19, fix_size * 0.38, wmLogoGiua.height / wmLogoGiua.width * fix_size * 0.38);
-            context.drawImage(wmLogoGoc, canvas.width - fix_size * wmscale_ratio* 0.13 , canvas.height -  fix_size * wmscale_ratio * 0.13 * wmLogoGoc.height / wmLogoGoc.width, fix_size * wmscale_ratio * 0.13,  fix_size * wmscale_ratio * 0.13 * wmLogoGoc.height / wmLogoGoc.width);
-            break;
+    if (!watermarkTypes.find(item => item.value == mark_type).src) {
+        context.drawImage(wmImages["logoGiua"], canvas.width * 0.37 - fix_size * 0.20, canvas.height * 0.4  - wmImages["logoGiua"].height / wmImages["logoGiua"].width * fix_size *  0.19, fix_size * 0.38, wmImages["logoGiua"].height / wmImages["logoGiua"].width * fix_size * 0.38);
+        context.drawImage(wmImages["logoGiua"], canvas.width - fix_size * wmscale_ratio* 0.13 , canvas.height -  fix_size * wmscale_ratio * 0.13 * wmImages["logoGiua"].height / wmImages["logoGiua"].width, fix_size * wmscale_ratio * 0.13,  fix_size * wmscale_ratio * 0.13 * wmImages["logoGiua"].height / wmImages["logoGiua"].width);
+    }else{
+        context.drawImage(wmImages[mark_type], (canvas.width - fix_size) / 2, (canvas.height - fix_size) / 2, fix_size, fix_size);
     }
     return canvas;
 }
@@ -380,30 +362,25 @@ function selectAll() {
 }
 document.getElementById('result').addEventListener('click', function(e) {
     // console.log(e.target);
+    var itemBlock = null;
     if (e.target.classList.contains('imageItem')) {
-        if (e.target.parentElement.classList.contains('thumbChecked')) {
-            e.target.parentElement.classList.remove("thumbChecked");
-            if (document.getElementsByClassName("thumbChecked").length == 0) {
-                document.getElementById('btn-download').style.display = "none";
-            }
-        } else {
-            e.target.parentElement.classList.add("thumbChecked");
-            if (document.getElementsByClassName("thumbChecked").length != 0) {
-                document.getElementById('btn-download').style.display = "inline-block";
-            }
-        }
+        itemBlock = e.target.parentElement;
     }
     if (e.target.classList.contains('imageBlock')) {
-        if (e.target.classList.contains('thumbChecked')) {
-            e.target.classList.remove("thumbChecked");
-            if (document.getElementsByClassName("thumbChecked").length == 0) {
-                document.getElementById('btn-download').style.display = "none";
-            }
-        } else {
-            e.target.classList.add("thumbChecked");
-            if (document.getElementsByClassName("thumbChecked").length != 0) {
-                document.getElementById('btn-download').style.display = "inline-block";
-            }
+        itemBlock = e.target;
+    }
+    if (!itemBlock) return;
+    if (itemBlock.classList.contains('thumbChecked')) {
+        links = links.filter(link => link != itemBlock.children[0]);
+        itemBlock.classList.remove("thumbChecked");
+        if (document.getElementsByClassName("thumbChecked").length == 0) {
+            document.getElementById('btn-download').style.display = "none";
+        }
+    } else {
+        links.push(itemBlock.children[0]);
+        itemBlock.classList.add("thumbChecked");
+        if (document.getElementsByClassName("thumbChecked").length != 0) {
+            document.getElementById('btn-download').style.display = "inline-block";
         }
     }
 });

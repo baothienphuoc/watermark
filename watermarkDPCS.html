@@ -21,16 +21,6 @@
                         <div>
                             <label>Chọn SĐT</label>
                             <select class="form-select" aria-label="Default select example" id="sl-mark-type" onclick="changeMarkType(event)">
-                                <option selected value="n0961887777">0961887777</option>
-                                <option value="n0886112255">0886112255</option>
-                                <option value="n0931987654">0931987654</option>
-                                <option value="n0844371111">0844371111</option>
-                                <option value="n0825484444">0825484444</option>
-                                <option value="n0783868668">0783868668</option>
-                                <option value="n0889821234">0889821234</option>
-                                <option value="n0835061234">0835061234</option>
-                                <!-- <option value="1">Cũ</option> -->
-                                <option value="100">Không sdt</option>
                             </select>
                         </div>
                         <div style="display: flex; gap: 10px">
@@ -78,6 +68,25 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.js" integrity="sha512-j7/1CJweOskkQiS5RD9W8zhEG9D9vpgByNGxPIqkO5KrXrwyDAroM9aQ9w8J7oRqwxGyz429hPVk/zR6IOMtSA==" crossorigin="anonymous"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css" integrity="sha512-H9jrZiiopUdsLpg94A333EfumgUBpO9MdbxStdeITo+KEIMaNfHNvwyjjDJb+ERPaRS6DpyRlKbvPUasNItRyw==" crossorigin="anonymous" />
 <script type="text/javascript">
+     const watermarkTypes = [
+        { "text": "0961887777", "value": "0961887777", "src": "DPCS/sdtbtp.png", "default": true },
+        { "text": "0886112255", "value": "0886112255", "src": "DPCS/sdtbtp.png", "default": false },
+        { "text": "0931987654", "value": "0931987654", "src": "DPCS/sdtbtp.png", "default": false },
+        { "text": "0844371111", "value": "0844371111", "src": "DPCS/sdtbtp.png", "default": false },
+        { "text": "0825484444", "value": "0825484444", "src": "DPCS/sdtbtp.png", "default": false },
+        { "text": "0783868668", "value": "0783868668", "src": "DPCS/sdtbtp.png", "default": false },
+        { "text": "0889821234", "value": "0889821234", "src": "DPCS/sdtbtp.png", "default": false },
+        { "text": "0835061234", "value": "0835061234", "src": "DPCS/sdtbtp.png", "default": false },
+        { "text": "Không SĐT", "value": "nophone", "src": "", "default": false },
+    ];
+    selectMarkType = document.getElementById("sl-mark-type");
+    for (var i = 0; i < watermarkTypes.length; i++) {
+        var option = document.createElement("option");
+        option.text = watermarkTypes[i].text;
+        option.value = watermarkTypes[i].value;
+        option.selected = watermarkTypes[i].default;
+        selectMarkType.add(option);
+    }
 var links = [];
 preloadResource();
 $(document).ready(function() {
@@ -226,65 +235,20 @@ async function changeMarkType(event) {
     }
 }
 async function preloadResource() {
-    window.wmLogobtp = new Image();
-    window.wmCenterbtp = new Image();
-    window.wm0961887777 = new Image();
-    window.wm0886112255 = new Image();
-    window.wm0931987654 = new Image();
-    window.wm0844371111 = new Image();
-    window.wm0825484444 = new Image();
-    window.wm0783868668 = new Image();
-    window.wm0889821234 = new Image();
-    window.wm0835061234 = new Image();
-    wmLogobtp.src = "DPCS/logobtp.png";
-    wmCenterbtp.src = "DPCS/centerbtp.png";
-    wm0961887777.src = "DPCS/sdtbtp.png";
-    wm0886112255.src = "DPCS/n0886112255.png";
-    wm0931987654.src = "DPCS/n0931987654.png";
-    wm0844371111.src = "DPCS/n0844371111.png";
-    wm0825484444.src = "DPCS/n0825484444.png";
-    wm0783868668.src = "DPCS/n0783868668.png";
-    wm0889821234.src = "DPCS/n0889821234.png";
-    wm0835061234.src = "DPCS/n0835061234.png";
-
-    await Promise.all([wmLogobtp.decode(), wmCenterbtp.decode(), wm0961887777.decode(), wm0886112255.decode(), wm0931987654.decode(), wm0844371111.decode(), wm0825484444.decode(), wm0783868668.decode(), wm0889821234.decode(), wm0835061234.decode()]);
-}
-async function drawImage(filename, imageObjectURL) {
-    var mark_type = $('#sl-mark-type')[0].value;
-    var canvas = await markImage(imageObjectURL, mark_type);
-    canvas.toBlob(function(blob) {
-        var result = document.getElementById('result');
-        url = URL.createObjectURL(blob);
-        var divElement = document.createElement("div");
-
-        divElement.classList.add("imageBlock");
-        var thumbElement = document.createElement("img");
-        thumbElement.classList.add("imageItem");
-        // thumbElement.style.backgroundImage = 'url("' + url + '")';
-        thumbElement.src = url;
-        // thumbElement.style.backgroundSize  = 'contain';
-        thumbElement.setAttribute("download", filename);
-        thumbElement.setAttribute("origin", imageObjectURL);
-        thumbElement.setAttribute("mark-type", mark_type);
-
-        thumbElement.setAttribute("draggable", false);
-        var imageElement = document.createElement("a");
-        imageElement.classList.add("imageZoomIcon");
-        imageElement.setAttribute("href", url);
-        imageElement.setAttribute("data-fancybox", "gallery");
-
-        var iconZoomElement = document.createElement("i");
-        iconZoomElement.classList.add("icon-zoom-in");
-        iconZoomElement.classList.add("icon-3x");
-
-        imageElement.appendChild(iconZoomElement);
-        divElement.appendChild(thumbElement);
-        divElement.appendChild(imageElement);
-
-        result.appendChild(divElement);
-        canvas.remove();
-    });
-
+      // Create image objects
+      window.wmImages = [];
+    let wmLogoGiua = new Image();
+    let wmLogoGocTrai = new Image();
+    wmLogoGiua.src = "DPCS/centerbtp.png";
+    wmLogoGocTrai.src = "DPCS/logobtp.png";
+    window.wmImages["logoGiua"] = wmLogoGiua;
+    window.wmImages["logoGocTrai"] = wmLogoGocTrai;
+    watermarkTypes.filter(item => item.src).forEach((item, index) => {
+        let image = new Image();
+        image.src = item.src;
+        window.wmImages[item.value] = image;
+    })
+    // await Promise.all(window.wmImages.map(image => image.decode())); // không đợi cũng được miễn là không thao tác nhanh
 }
 async function markImage(imageObjectURL, mark_type) {
     // console.log(e);
@@ -306,32 +270,16 @@ async function markImage(imageObjectURL, mark_type) {
     context.drawImage(image, 0, 0, canvas.width, canvas.height);
     let isInsertLogo = $('#cb-logo-left')[0].checked;
     if (isInsertLogo) {
-        context.drawImage(wmLogobtp, 0.11 * canvas.width * 0.19 * (isheight ? 1 : canvas.height / canvas.width), canvas.width * 0.19 * wmLogobtp.height / wmLogobtp.width * (isheight ? 1 : canvas.height / canvas.width) * 0.1, canvas.width * 0.19 * (isheight ? 1 : canvas.height / canvas.width), canvas.width * 0.19 * wmLogobtp.height / wmLogobtp.width * (isheight ? 1 : canvas.height / canvas.width));
+        context.drawImage(wmImages["logoGocTrai"], 0.11 * canvas.width * 0.19 * (isheight ? 1 : canvas.height / canvas.width), canvas.width * 0.19 * wmImages["logoGocTrai"].height / wmImages["logoGocTrai"].width * (isheight ? 1 : canvas.height / canvas.width) * 0.1, canvas.width * 0.19 * (isheight ? 1 : canvas.height / canvas.width), canvas.width * 0.19 * wmImages["logoGocTrai"].height / wmImages["logoGocTrai"].width * (isheight ? 1 : canvas.height / canvas.width));
     }
     //btp
     //draw logobtp góc trên bên trái
     //draw centerbtp dưới giữa 1 khoảng nhỏ
-    context.drawImage(wmCenterbtp, canvas.width - canvas.width / 2 - fix_size / 2, canvas.height - canvas.height / 2.27, fix_size, wmCenterbtp.height / wmCenterbtp.width * fix_size);
+    context.drawImage(wmImages["logoGiua"], canvas.width - canvas.width / 2 - fix_size / 2, canvas.height - canvas.height / 2.27, fix_size, wmImages["logoGiua"].height / wmImages["logoGiua"].width * fix_size);
     //draw sdtbtp góc dưới bên phải, sdt phóng to x2
     if (mark_type == 100) return canvas;
     let wmSdt = null;
-    if (mark_type == 'n0961887777'){
-        wmSdt = wm0961887777;
-    }else if (mark_type == 'n0886112255'){
-        wmSdt = wm0886112255;
-    }else if (mark_type == 'n0931987654'){
-        wmSdt = wm0931987654;
-    }else if (mark_type == 'n0844371111'){
-        wmSdt = wm0844371111;
-    }else if (mark_type == 'n0825484444'){
-        wmSdt = wm0825484444;
-    }else if (mark_type == 'n0783868668'){
-        wmSdt = wm0783868668;
-    }else if (mark_type == 'n0889821234'){
-        wmSdt = wm0889821234;
-    }else if (mark_type == 'n0835061234'){
-        wmSdt = wm0835061234;
-    }
+    wmSdt = wmImages[mark_type];
     if (!wmSdt) return canvas;
     
     if (isheight){
@@ -403,30 +351,65 @@ function selectAll() {
 }
 document.getElementById('result').addEventListener('click', function(e) {
     // console.log(e.target);
+    var itemBlock = null;
     if (e.target.classList.contains('imageItem')) {
-        var parentItem = e.target.parentElement;
-        var childrenItem = e.target;
+        itemBlock = e.target.parentElement;
     }
     if (e.target.classList.contains('imageBlock')) {
-        var parentItem = e.target;
-        var childrenItem = e.target.children[0];
+        itemBlock = e.target;
     }
-    
-    if (parentItem.classList.contains('thumbChecked')) {
-        links = links.splice(links.indexOf(childrenItem));
-        parentItem.classList.remove("thumbChecked");
+    if (!itemBlock) return;
+    if (itemBlock.classList.contains('thumbChecked')) {
+        links = links.filter(link => link != itemBlock.children[0]);
+        itemBlock.classList.remove("thumbChecked");
+        if (document.getElementsByClassName("thumbChecked").length == 0) {
+            document.getElementById('btn-download').style.display = "none";
+        }
     } else {
-        parentItem.classList.add("thumbChecked");
-        links.push(childrenItem);
-    }
-    if (document.getElementsByClassName("thumbChecked").length == 0) {
-        document.getElementById('btn-download').style.display = "none";
-    }
-    if (document.getElementsByClassName("thumbChecked").length != 0) {
-        document.getElementById('btn-download').style.display = "inline-block";
+        links.push(itemBlock.children[0]);
+        itemBlock.classList.add("thumbChecked");
+        if (document.getElementsByClassName("thumbChecked").length != 0) {
+            document.getElementById('btn-download').style.display = "inline-block";
+        }
     }
 });
+async function drawImage(filename, imageObjectURL) {
+    var mark_type = $('#sl-mark-type')[0].value;
+    var canvas = await markImage(imageObjectURL, mark_type);
+    canvas.toBlob(function(blob) {
+        var result = document.getElementById('result');
+        url = URL.createObjectURL(blob);
+        var divElement = document.createElement("div");
 
+        divElement.classList.add("imageBlock");
+        var thumbElement = document.createElement("img");
+        thumbElement.classList.add("imageItem");
+        // thumbElement.style.backgroundImage = 'url("' + url + '")';
+        thumbElement.src = url;
+        // thumbElement.style.backgroundSize  = 'contain';
+        thumbElement.setAttribute("download", filename);
+        thumbElement.setAttribute("origin", imageObjectURL);
+        thumbElement.setAttribute("mark-type", mark_type);
+
+        thumbElement.setAttribute("draggable", false);
+        var imageElement = document.createElement("a");
+        imageElement.classList.add("imageZoomIcon");
+        imageElement.setAttribute("href", url);
+        imageElement.setAttribute("data-fancybox", "gallery");
+
+        var iconZoomElement = document.createElement("i");
+        iconZoomElement.classList.add("icon-zoom-in");
+        iconZoomElement.classList.add("icon-3x");
+
+        imageElement.appendChild(iconZoomElement);
+        divElement.appendChild(thumbElement);
+        divElement.appendChild(imageElement);
+
+        result.appendChild(divElement);
+        canvas.remove();
+    });
+
+}
 async function downloadImages() {
     if (!links.length) {
         alert("Không có ảnh nào được chọn!");

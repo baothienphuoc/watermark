@@ -18,21 +18,6 @@
                     <button class="btn btn-primary" onclick="document.getElementById('product-image-upload').click();">Upload a file</button>
                     <input type="file" name="product-image-upload" id="product-image-upload" accept=".jpeg, .jpg, .png, .webp" multiple />
                     <select class="form-select" aria-label="Default select example" id="sl-mark-type" onchange="changeMarkType(event)">
-                        <option selected value="0">Mặc định</option>
-                        <!-- <option value="1">Khách Sạn</option>
-                        <option value="2">Nha Khoa</option> -->
-                        <option value="0838344444">0838344444</option>
-                        <option value="0813866868">0813866868</option>
-                        <option value="0842554444">0842554444</option>
-                        <option value="0837974444">0837974444</option>
-                        <option value="0898168338">0898168338</option>
-                        <option value="0774194444">0774194444</option>
-                        <option value="0836344444">0836344444</option>
-                        <option value="0931987654">0931987654</option>
-                        <option value="0822931234">0822931234</option>
-                        <option value="0825484444">0825484444</option>
-                        <option value="0859784444">0859784444</option>
-                        <option value="0889821234">0889821234</option>
                     </select>
                 </div>
                 <div>
@@ -73,6 +58,30 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.js" integrity="sha512-j7/1CJweOskkQiS5RD9W8zhEG9D9vpgByNGxPIqkO5KrXrwyDAroM9aQ9w8J7oRqwxGyz429hPVk/zR6IOMtSA==" crossorigin="anonymous"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css" integrity="sha512-H9jrZiiopUdsLpg94A333EfumgUBpO9MdbxStdeITo+KEIMaNfHNvwyjjDJb+ERPaRS6DpyRlKbvPUasNItRyw==" crossorigin="anonymous" />
 <script type="text/javascript">
+    const watermarkTypes = [
+        { "text": "Mặc định", "value": "0", "src": "", "default": true },
+        { "text": "0927687777", "value": "0927687777", "src": "TT/n0927687777.png", "default": false },
+        { "text": "0838344444", "value": "0838344444", "src": "TT/n0838344444.png", "default": false },
+        { "text": "0931987654", "value": "0931987654", "src": "TT/n0931987654.png", "default": false },
+        { "text": "0822931234", "value": "0822931234", "src": "TT/n0822931234.png", "default": false },
+        { "text": "0825484444", "value": "0825484444", "src": "TT/n0825484444.png", "default": false },
+        { "text": "0859784444", "value": "0859784444", "src": "TT/n0859784444.png", "default": false },
+        { "text": "0889821234", "value": "0889821234", "src": "TT/n0889821234.png", "default": false },
+        { "text": "0813866868", "value": "0813866868", "src": "TT/n0813866868.png", "default": false },
+        { "text": "0842554444", "value": "0842554444", "src": "TT/n0842554444.png", "default": false },
+        { "text": "0837974444", "value": "0837974444", "src": "TT/n0837974444.png", "default": false },
+        { "text": "0898168338", "value": "0898168338", "src": "TT/n0898168338.png", "default": false },
+        { "text": "0774194444", "value": "0774194444", "src": "TT/n0774194444.png", "default": false },
+        { "text": "0836344444", "value": "0836344444", "src": "TT/n0836344444.png", "default": false }
+    ];
+    selectMarkType = document.getElementById("sl-mark-type");
+    for (var i = 0; i < watermarkTypes.length; i++) {
+        var option = document.createElement("option");
+        option.text = watermarkTypes[i].text;
+        option.value = watermarkTypes[i].value;
+        option.selected = watermarkTypes[i].default;
+        selectMarkType.add(option);
+    }
 var links = [];
 preloadResource();
 $(document).ready(function() {
@@ -220,75 +229,6 @@ async function changeMarkType(event){
             })(i);
         }
 }
-async function preloadResource() {
-    // window.wmBottom = new Image();
-    // window.wmLogo = new Image();
-    // window.wmLogo1 = new Image();
-    // window.wmHotline = new Image();
-    // window.wmCenter = new Image();
-    // window.wmCenter2 = new Image();
-    // window.wmLogoBottom = new Image();
-    // window.wmLogoBottom1 = new Image();
-    // window.wmLogoBottom2 = new Image();
-    // window.wmNhaKhoa = new Image();
-    // window.wmLogoHong = new Image();
-    // window.wmLogoMin = new Image();
-    // window.wmLogoNhan = new Image();
-    // window.wmLogoMi = new Image();
-    // window.wmLogo0961887777 = new Image();
-    // window.wm0961887777 = new Image();
-    // wmBottom.src = "TT/bottom.png";
-    // wmLogo.src = "TT/logo.png";
-    // wmLogo1.src = "TT/logon1.png";
-    // wmHotline.src = "TT/sdt.png";
-    // wmCenter.src = "TT/center.png";
-    // wmCenter2.src = "TT/center2.png";
-    // wmLogoBottom.src = "TT/logobottom.png";
-    // wmLogoBottom1.src = "TT/logobottomn1.png";
-    // wmLogoBottom2.src = "TT/hl2.png";
-    // wmNhaKhoa.src = "TT/nhakhoa.png";
-    // wmLogoHong.src = "TT/logohong.png";
-    // wmLogoMin.src = "TT/logomin.png";
-    // wmLogoNhan.src = "TT/logonhan.png";
-    // wmLogoMi.src = "TT/logomi.png";
-    // wmLogo0961887777.src = "TT/logo0961887777.png";
-    // wm0961887777.src = "TT/0961887777.png";
-    // await Promise.all([wmBottom.decode(), wmLogo.decode(), wmLogo1.decode(), wmHotline.decode(), wmCenter.decode(), wmCenter2.decode(), wmLogoBottom.decode(), wmLogoBottom1.decode(), wmLogoBottom2.decode(), wmNhaKhoa.decode(), wmLogoHong.decode(), wmLogoMin.decode(), wmLogoNhan.decode(), wmLogoMi.decode(), wmLogo0961887777.decode(), wm0961887777.decode()]);
-
-    window.wmCentern = new Image();
-    window.wmLogon = new Image();
-    window.wm0927687777n = new Image();
-    window.wm0838344444n = new Image();
-    window.wm0813866868n = new Image();
-    window.wm0842554444n = new Image();
-    window.wm0837974444n = new Image();
-    window.wm0898168338n = new Image();
-    window.wm0774194444n = new Image();
-    window.wm0836344444n = new Image();
-    window.wm0931987654n = new Image();
-    window.wm0822931234n = new Image();
-    window.wm0825484444n = new Image();
-    window.wm0859784444n = new Image();
-    window.wm0889821234n = new Image();
-
-    wmCentern.src = "TT/centern.png";
-    wmLogon.src = "TT/logo.png";
-    wm0927687777n.src = "TT/n0927687777.png";
-    wm0838344444n.src = "TT/n0838344444.png";
-    wm0813866868n.src = "TT/n0813866868.png";
-    wm0842554444n.src = "TT/n0842554444.png";
-    wm0837974444n.src = "TT/n0837974444.png";
-    wm0898168338n.src = "TT/n0898168338.png";
-    wm0774194444n.src = "TT/n0774194444.png";
-    wm0836344444n.src = "TT/n0836344444.png";
-    wm0931987654n.src = "TT/n0931987654.png";
-    wm0822931234n.src = "TT/n0822931234.png";
-    wm0825484444n.src = "TT/n0825484444.png";
-    wm0859784444n.src = "TT/n0859784444.png";
-    wm0889821234n.src = "TT/n0889821234.png";
-
-    await Promise.all([wmCentern.decode(), wmLogon.decode(), wm0927687777n.decode(), wm0838344444n.decode(), wm0813866868n.decode(), wm0842554444n.decode(), wm0837974444n.decode(), wm0898168338n.decode(), wm0774194444n.decode(), wm0836344444n.decode(), wm0931987654n.decode(), wm0822931234n.decode(), wm0825484444n.decode(), wm0859784444n.decode(), wm0889821234n.decode()]);
-}
 async function drawImage(filename, imageObjectURL) {
     var mark_type = $('#sl-mark-type')[0].value;
     var canvas = await markImage(imageObjectURL, mark_type);
@@ -326,6 +266,23 @@ async function drawImage(filename, imageObjectURL) {
     });
 
 }
+async function preloadResource() {
+
+    // Create image objects
+    window.wmImages = [];
+    let wmLogoGiua = new Image();
+    let wmLogoGocTrai = new Image();
+    wmLogoGiua.src = "TT/centern.png";
+    wmLogoGocTrai.src = "TT/logo.png";
+    window.wmImages["logoGiua"] = wmLogoGiua;
+    window.wmImages["logoGocTrai"] = wmLogoGocTrai;
+    watermarkTypes.filter(item => item.src).forEach((item, index) => {
+        let image = new Image();
+        image.src = item.src;
+        window.wmImages[item.value] = image;
+    })
+    // await Promise.all(window.wmImages.map(image => image.decode())); // không đợi cũng được miễn là không thao tác nhanh
+}
 async function markImage(imageObjectURL, mark_type){
     // console.log(e);
     var image = new Image();
@@ -344,44 +301,21 @@ async function markImage(imageObjectURL, mark_type){
     canvas.height = image.height * scale_ratio;
     context.drawImage(image, 0, 0, canvas.width, canvas.height);
 
-    let wmNumber = null;
-    if (mark_type == "0838344444"){//0838344444
-        wmNumber = wm0838344444n;
-    }else if (mark_type == "0813866868"){//min wm0813866868n
-        wmNumber = wm0813866868n;
-    }else if (mark_type == "0842554444"){//nhan wm0842554444n
-        wmNumber = wm0842554444n;
-    }else if (mark_type == "0898168338"){//mi wm0898168338n
-        wmNumber = wm0898168338n;
-    }else if (mark_type == "0837974444"){//n wm0837974444n
-        wmNumber = wm0837974444n;
-    }else if (mark_type == "0774194444"){//n wm0774194444n
-        wmNumber = wm0774194444n;
-    }else if (mark_type == "0836344444"){//n wm0836344444n
-        wmNumber = wm0836344444n;
-    }else if (mark_type == "0931987654"){//n wm0931987654n
-        wmNumber = wm0931987654n;
-    }else if (mark_type == "0822931234"){//n wm0822931234n
-        wmNumber = wm0822931234n;
-    }else if (mark_type == "0825484444"){//n wm0825484444n
-        wmNumber = wm0825484444n;
-    }else if (mark_type == "0859784444"){//n wm0859784444n
-        wmNumber = wm0859784444n;
-    }else if (mark_type == "0889821234"){//n wm0889821234n
-        wmNumber = wm0889821234n;
-    }else {
-        wmNumber = wm0927687777n;
-    }
+    let wmNumber = wmImages[mark_type];
+    let wmLogoGocTrai = wmImages["logoGocTrai"];
+    let wmLogoGiua = wmImages["logoGiua"];
     
     let ratioHeightWidth = isheight ? 1 : canvas.height / canvas.width;
-    if (isheight){
-        context.drawImage(wmNumber, canvas.width - canvas.width * 0.42 * ratioHeightWidth, canvas.height - canvas.height * 0.01 * ratioHeightWidth -  canvas.width * 0.38 * wmNumber.height / wmNumber.width * ratioHeightWidth, canvas.width * 0.38 * ratioHeightWidth, canvas.width * 0.38 * wmNumber.height / wmNumber.width * ratioHeightWidth);
+    if (wmNumber){
+        if (isheight){
+            context.drawImage(wmNumber, canvas.width - canvas.width * 0.42 * ratioHeightWidth, canvas.height - canvas.height * 0.01 * ratioHeightWidth -  canvas.width * 0.38 * wmNumber.height / wmNumber.width * ratioHeightWidth, canvas.width * 0.38 * ratioHeightWidth, canvas.width * 0.38 * wmNumber.height / wmNumber.width * ratioHeightWidth);
+        }
+        else{
+            context.drawImage(wmNumber, canvas.width - canvas.width * 0.39 * ratioHeightWidth, canvas.height - canvas.height * 0.02 - canvas.width * 0.35 * wmNumber.height / wmNumber.width * ratioHeightWidth, canvas.width * 0.35 * ratioHeightWidth, canvas.width * 0.35 * wmNumber.height / wmNumber.width * ratioHeightWidth);
+        }
     }
-    else{
-        context.drawImage(wmNumber, canvas.width - canvas.width * 0.39 * ratioHeightWidth, canvas.height - canvas.height * 0.02 - canvas.width * 0.35 * wmNumber.height / wmNumber.width * ratioHeightWidth, canvas.width * 0.35 * ratioHeightWidth, canvas.width * 0.35 * wmNumber.height / wmNumber.width * ratioHeightWidth);
-    }
-    context.drawImage(wmLogon, 0.11 * canvas.width * 0.20 * ratioHeightWidth, canvas.width * 0.20 * wmLogon.height / wmLogon.width * ratioHeightWidth * 0.1, canvas.width * 0.20 * ratioHeightWidth, canvas.width * 0.20 * wmLogon.height / wmLogon.width * ratioHeightWidth);
-    context.drawImage(wmCentern, canvas.width - canvas.width / 2 - fix_size / 2, canvas.height - canvas.height / 2.8, fix_size, wmCentern.height / wmCentern.width * fix_size);
+    context.drawImage(wmLogoGocTrai, 0.11 * canvas.width * 0.20 * ratioHeightWidth, canvas.width * 0.20 * wmLogoGocTrai.height / wmLogoGocTrai.width * ratioHeightWidth * 0.1, canvas.width * 0.20 * ratioHeightWidth, canvas.width * 0.20 * wmLogoGocTrai.height / wmLogoGocTrai.width * ratioHeightWidth);
+    context.drawImage(wmLogoGiua, canvas.width - canvas.width / 2 - fix_size / 2, canvas.height - canvas.height / 2.8, fix_size, wmLogoGiua.height / wmLogoGiua.width * fix_size);
     return canvas;
 }
 async function getImageBrightness(image, startX, startY, widthI, heightI){
@@ -443,34 +377,28 @@ function selectAll() {
 }
 document.getElementById('result').addEventListener('click', function(e) {
     // console.log(e.target);
+    var itemBlock = null;
     if (e.target.classList.contains('imageItem')) {
-        if (e.target.parentElement.classList.contains('thumbChecked')) {
-            e.target.parentElement.classList.remove("thumbChecked");
-            if (document.getElementsByClassName("thumbChecked").length == 0) {
-                document.getElementById('btn-download').style.display = "none";
-            }
-        } else {
-            e.target.parentElement.classList.add("thumbChecked");
-            if (document.getElementsByClassName("thumbChecked").length != 0) {
-                document.getElementById('btn-download').style.display = "inline-block";
-            }
-        }
+        itemBlock = e.target.parentElement;
     }
     if (e.target.classList.contains('imageBlock')) {
-        if (e.target.classList.contains('thumbChecked')) {
-            e.target.classList.remove("thumbChecked");
-            if (document.getElementsByClassName("thumbChecked").length == 0) {
-                document.getElementById('btn-download').style.display = "none";
-            }
-        } else {
-            e.target.classList.add("thumbChecked");
-            if (document.getElementsByClassName("thumbChecked").length != 0) {
-                document.getElementById('btn-download').style.display = "inline-block";
-            }
+        itemBlock = e.target;
+    }
+    if (!itemBlock) return;
+    if (itemBlock.classList.contains('thumbChecked')) {
+        links = links.filter(link => link != itemBlock.children[0]);
+        itemBlock.classList.remove("thumbChecked");
+        if (document.getElementsByClassName("thumbChecked").length == 0) {
+            document.getElementById('btn-download').style.display = "none";
+        }
+    } else {
+        links.push(itemBlock.children[0]);
+        itemBlock.classList.add("thumbChecked");
+        if (document.getElementsByClassName("thumbChecked").length != 0) {
+            document.getElementById('btn-download').style.display = "inline-block";
         }
     }
 });
-
 async function downloadImages() {
     if (!links.length) {
         alert("Không có ảnh nào được chọn!");
