@@ -263,7 +263,7 @@ export class DragDropManager {
     });
     
     // Show paste hint periodically
-    this.showPasteHint();
+    // this.showPasteHint();
   }
 
   preventDefaults(e) {
