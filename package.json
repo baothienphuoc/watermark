@@ -1,0 +1,55 @@
+{
+  "name": "watermark-tools",
+  "version": "2.0.0",
+  "description": "Multi-brand watermark application with modern UI/UX",
+  "main": "src/main.js",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "serve": "vite preview --port 3000",
+    "lint": "eslint src --ext .js",
+    "lint:fix": "eslint src --ext .js --fix",
+    "format": "prettier --write \"src/**/*.{js,css,html}\"",
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "test:coverage": "jest --coverage"
+  },
+  "keywords": [
+    "watermark",
+    "image-processing",
+    "canvas",
+    "javascript",
+    "web-app"
+  ],
+  "author": "baothienphuoc",
+  "license": "MIT",
+  "dependencies": {
+    "fancybox": "^3.0.1",
+    "jszip": "^3.10.1"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-legacy": "^4.1.1",
+    "eslint": "^8.50.0",
+    "eslint-config-prettier": "^9.0.0",
+    "jest": "^29.7.0",
+    "jest-environment-jsdom": "^29.7.0",
+    "prettier": "^3.0.3",
+    "vite": "^4.4.11",
+    "vite-plugin-pwa": "^0.16.5"
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not dead"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/baothienphuoc/watermark.git"
+  },
+  "bugs": {
+    "url": "https://github.com/baothienphuoc/watermark/issues"
+  },
+  "homepage": "https://baothienphuoc.github.io/watermark/"
+}

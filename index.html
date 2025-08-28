@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    
+    <title>Watermark Tools - Multi Brand</title>
+    <meta name="description" content="Công cụ chèn watermark đa thương hiệu - AT247, DPCS, DPTT, DPSG">
+    <meta name="author" content="baothienphuoc">
+    <meta name="keywords" content="watermark, logo, chèn logo, AT247, DPCS, DPTT, DPSG">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://baothienphuoc.github.io/watermark/">
+    <meta property="og:title" content="Watermark Tools - Multi Brand">
+    <meta property="og:description" content="Công cụ chèn watermark đa thương hiệu">
+    <meta property="og:image" content="https://baothienphuoc.github.io/watermark/preview.jpg">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://baothienphuoc.github.io/watermark/">
+    <meta property="twitter:title" content="Watermark Tools - Multi Brand">
+    <meta property="twitter:description" content="Công cụ chèn watermark đa thương hiệu">
+    <meta property="twitter:image" content="https://baothienphuoc.github.io/watermark/preview.jpg">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="apple-touch-icon" href="apple-touch-icon.png">
+    
+    <!-- Stylesheets -->
+    <link href="src/styles/main.css" rel="stylesheet">
+    
+    <!-- External Libraries -->
+    <!-- Bootstrap Icons (for better icons) -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css" rel="stylesheet">
+    
+    <!-- jQuery (for Fancybox compatibility) -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    
+    <!-- Fancybox for image preview -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css">
+    
+    <!-- JSZip for ZIP downloads (fallback) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
+    
+    <!-- Service Worker for caching (optional) -->
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('sw.js')
+                    .then(registration => console.log('SW registered'))
+                    .catch(error => console.log('SW registration failed'));
+            });
+        }
+    </script>
+</head>
+
+<body>
+    <!-- Skip to main content for accessibility -->
+    <a href="#main-content" class="skip-link">Bỏ qua và đi đến nội dung chính</a>
+
+    <!-- Application Container -->
+    <div id="app" role="main" aria-labelledby="app-title">
+        <!-- Loading screen while app initializes -->
+        <div class="app-loading" aria-live="polite">
+            <div class="loading-content">
+                <div class="spinner" aria-label="Đang tải"></div>
+                <h2 id="app-title">Đang khởi tạo ứng dụng...</h2>
+                <p>Vui lòng đợi trong giây lát</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Application Script -->
+    <script type="module" src="src/main.js"></script>
+    
+    <!-- Fallback for older browsers -->
+    <script nomodule>
+        document.getElementById('app').innerHTML = `
+            <div class="browser-warning" role="alert">
+                <div class="warning-content">
+                    <h3>⚠️ Trình duyệt không được hỗ trợ</h3>
+                    <p>Ứng dụng này yêu cầu trình duyệt hiện đại hỗ trợ ES6 modules.</p>
+                    <p>Vui lòng sử dụng:</p>
+                    <ul>
+                        <li>Chrome 61+</li>
+                        <li>Firefox 60+</li>
+                        <li>Safari 10.1+</li>
+                        <li>Edge 16+</li>
+                    </ul>
+                    <p>Hoặc <a href="watermark.html">sử dụng phiên bản cũ</a></p>
+                </div>
+            </div>
+        `;
+    </script>
+
+    <!-- Analytics (optional) -->
+    <!-- 
+    <script async src="https://www.googletagmanager.com/gtag/js?id=GA_MEASUREMENT_ID"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'GA_MEASUREMENT_ID');
+    </script>
+    -->
+</body>
+</html>
