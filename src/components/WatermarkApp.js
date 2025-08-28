@@ -702,27 +702,165 @@ export class WatermarkApp {
 
   showLoading(text = 'Đang xử lý...') {
     this.isProcessing = true;
-    const overlay = this.container.querySelector('.loading-overlay');
-    const loadingText = this.container.querySelector('.loading-text');
-    
-    loadingText.textContent = text;
-    overlay.style.display = 'flex';
+    // Show as toast instead of overlay to not block user interaction
+    this.showLoadingToast(text);
   }
 
   hideLoading() {
     this.isProcessing = false;
-    const overlay = this.container.querySelector('.loading-overlay');
-    overlay.style.display = 'none';
-    this.updateProgress(0);
+    this.hideLoadingToast();
+  }
+
+  showLoadingToast(text) {
+    // Remove existing loading toast
+    const existingToast = document.querySelector('.loading-toast');
+    if (existingToast) {
+      existingToast.remove();
+    }
+
+    const toast = document.createElement('div');
+    toast.className = 'loading-toast';
+    toast.innerHTML = `
+      <div class="loading-content">
+        <div class="spinner-mini"></div>
+        <span class="loading-text">${text}</span>
+      </div>
+    `;
+
+    // Add styles if not exist
+    if (!document.querySelector('#loading-toast-styles')) {
+      const styles = document.createElement('style');
+      styles.id = 'loading-toast-styles';
+      styles.textContent = `
+        .loading-toast {
+          position: fixed;
+          top: 2rem;
+          right: 2rem;
+          background: var(--surface-color);
+          border: 1px solid var(--border-color);
+          border-radius: var(--border-radius);
+          padding: 1rem 1.5rem;
+          box-shadow: var(--shadow-lg);
+          z-index: 9999;
+          display: flex;
+          align-items: center;
+          gap: 0.75rem;
+          min-width: 200px;
+          animation: toast-slide-in 0.3s ease;
+        }
+        
+        .loading-content {
+          display: flex;
+          align-items: center;
+          gap: 0.75rem;
+        }
+        
+        .spinner-mini {
+          width: 16px;
+          height: 16px;
+          border: 2px solid var(--border-color);
+          border-top: 2px solid var(--primary-color);
+          border-radius: 50%;
+          animation: spin 1s linear infinite;
+        }
+        
+        .loading-text {
+          color: var(--text-color);
+          font-size: 0.9rem;
+          font-weight: 500;
+        }
+        
+        @keyframes toast-slide-in {
+          from {
+            transform: translateX(100%);
+            opacity: 0;
+          }
+          to {
+            transform: translateX(0);
+            opacity: 1;
+          }
+        }
+        
+        @keyframes spin {
+          0% { transform: rotate(0deg); }
+          100% { transform: rotate(360deg); }
+        }
+      `;
+      document.head.appendChild(styles);
+    }
+
+    document.body.appendChild(toast);
+    this.currentLoadingToast = toast;
+  }
+
+  hideLoadingToast() {
+    if (this.currentLoadingToast) {
+      this.currentLoadingToast.style.animation = 'toast-slide-in 0.3s ease reverse';
+      setTimeout(() => {
+        if (this.currentLoadingToast && this.currentLoadingToast.parentNode) {
+          this.currentLoadingToast.remove();
+        }
+        this.currentLoadingToast = null;
+      }, 300);
+    }
   }
 
   updateProgress(progress, text = null) {
+    // Update progress in loading toast if exists
+    if (this.currentLoadingToast) {
+      const loadingText = this.currentLoadingToast.querySelector('.loading-text');
+      if (loadingText && text) {
+        loadingText.textContent = text;
+      }
+      
+      // Add progress bar to toast if progress > 0
+      if (progress > 0) {
+        let progressBar = this.currentLoadingToast.querySelector('.toast-progress');
+        if (!progressBar) {
+          progressBar = document.createElement('div');
+          progressBar.className = 'toast-progress';
+          progressBar.innerHTML = '<div class="toast-progress-fill"></div>';
+          
+          // Add progress bar styles
+          if (!document.querySelector('#toast-progress-styles')) {
+            const styles = document.createElement('style');
+            styles.id = 'toast-progress-styles';
+            styles.textContent = `
+              .toast-progress {
+                width: 100%;
+                height: 3px;
+                background: var(--border-color);
+                border-radius: 2px;
+                overflow: hidden;
+                margin-top: 0.5rem;
+              }
+              
+              .toast-progress-fill {
+                height: 100%;
+                background: var(--primary-color);
+                transition: width 0.3s ease;
+                width: 0%;
+              }
+            `;
+            document.head.appendChild(styles);
+          }
+          
+          this.currentLoadingToast.querySelector('.loading-content').appendChild(progressBar);
+        }
+        
+        const progressFill = progressBar.querySelector('.toast-progress-fill');
+        progressFill.style.width = `${progress * 100}%`;
+      }
+    }
+    
+    // Fallback: update legacy progress bar if exists
     const progressFill = this.container.querySelector('.progress-fill');
+    if (progressFill) {
+      progressFill.style.width = `${progress * 100}%`;
+    }
+    
     const loadingText = this.container.querySelector('.loading-text');
-    
-    progressFill.style.width = `${progress * 100}%`;
-    
-    if (text) {
+    if (loadingText && text) {
       loadingText.textContent = text;
     }
   }
@@ -782,6 +920,9 @@ export class WatermarkApp {
         component.destroy();
       }
     });
+    
+    // Cleanup loading toast
+    this.hideLoadingToast();
     
     // Reset state
     this.images = [];
