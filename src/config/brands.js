@@ -85,7 +85,8 @@ export const BRAND_CONFIGS = {
       { text: "0837974444", value: "0837974444", src: "TT/n0837974444.png" },
       { text: "0898168338", value: "0898168338", src: "TT/n0898168338.png" },
       { text: "0774194444", value: "0774194444", src: "TT/n0774194444.png" },
-      { text: "0836344444", value: "0836344444", src: "TT/n0836344444.png" }
+      { text: "0836344444", value: "0836344444", src: "TT/n0836344444.png" },
+      { text: "0817867777", value: "0817867777", src: "TT/n0817867777.png" }
     ],
     watermarkLogic: 'TT',
     theme: {
