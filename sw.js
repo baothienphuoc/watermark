@@ -1,5 +1,5 @@
 // Service Worker for caching static assets
-const CACHE_NAME = 'watermark-app-v2';
+const CACHE_NAME = 'watermark-app-v3';
 const APP_BASE_URL = new URL('.', self.location.href);
 
 const resolveAssetUrl = (path) => new URL(path, APP_BASE_URL).href;
@@ -39,6 +39,7 @@ self.addEventListener('install', (event) => {
         console.log('Opened cache');
         return cache.addAll(urlsToCache);
       })
+      .then(() => self.skipWaiting())
   );
 });
 
@@ -67,25 +68,19 @@ self.addEventListener('fetch', (event) => {
       }
 
       const cacheKey = normalizeRequestUrl(event.request);
-      const cachedResponse = await cache.match(cacheKey);
 
-      if (cachedResponse) {
-        return cachedResponse;
-      }
-
+      // Network-first so deployed updates show up immediately;
+      // fall back to the cache only when offline.
       try {
         const response = await fetch(event.request);
 
-        if (!response || response.status !== 200 || response.type !== 'basic') {
-          return response;
+        if (response && response.status === 200 && response.type === 'basic') {
+          cache.put(cacheKey, response.clone());
         }
-
-        const responseToCache = response.clone();
-
-        cache.put(cacheKey, responseToCache);
 
         return response;
       } catch (error) {
+        const cachedResponse = await cache.match(cacheKey);
         return cachedResponse || Response.error();
       }
     })
@@ -104,6 +99,6 @@ self.addEventListener('activate', (event) => {
           }
         })
       );
-    })
+    }).then(() => self.clients.claim())
   );
 });
