@@ -28,8 +28,9 @@ export class WatermarkApp {
     this.images = [];
     this.selectedImages = new Set();
     this.currentMarkType = this.getDefaultMarkType();
+    this.skipLogo = false; // "Không chèn logo" – giữ nguyên khi đổi thương hiệu
     this.isProcessing = false;
-    
+
     // Components
     this.components = {};
     
@@ -72,6 +73,12 @@ export class WatermarkApp {
                           aria-describedby="mark-type-help">
                     ${this.renderMarkTypeOptions()}
                   </select>
+                </div>
+                <div class="logo-toggle">
+                  <label>
+                    <input type="checkbox" id="skip-logo-toggle" ${this.skipLogo ? 'checked' : ''}>
+                    Không chèn logo
+                  </label>
                 </div>
                 ${this.renderBrandSpecificOptions()}
               </div>
@@ -173,6 +180,15 @@ export class WatermarkApp {
       this.currentMarkType = e.target.value;
       this.reprocessSelectedImages();
     });
+
+    // Skip logo toggle (all brands)
+    const skipLogoToggle = this.container.querySelector('#skip-logo-toggle');
+    skipLogoToggle.addEventListener('change', (e) => {
+      this.skipLogo = e.target.checked;
+      this.syncLogoLeftToggle();
+      this.reprocessSelectedImages();
+    });
+    this.syncLogoLeftToggle();
 
     // Select all button
     const selectAllBtn = this.container.querySelector('#select-all-btn');
@@ -662,9 +678,17 @@ export class WatermarkApp {
     }
   }
 
+  // "Chèn logo góc trái" (DPCS) has no effect while logos are skipped
+  syncLogoLeftToggle() {
+    const logoToggle = this.container.querySelector('#logo-left-toggle');
+    if (logoToggle) {
+      logoToggle.disabled = this.skipLogo;
+    }
+  }
+
   getBrandSpecificOptions() {
-    const options = {};
-    
+    const options = { skipLogo: this.skipLogo };
+
     if (this.brandConfig.features?.logoLeftToggle) {
       const logoToggle = this.container.querySelector('#logo-left-toggle');
       options.insertLogoLeft = logoToggle ? logoToggle.checked : true;

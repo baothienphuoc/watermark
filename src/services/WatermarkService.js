@@ -72,16 +72,16 @@ export class WatermarkService {
     // Apply brand-specific watermark logic
     switch (this.brandConfig.watermarkLogic) {
       case 'AT247':
-        this.applyAT247Watermark(canvas, image, markType);
+        this.applyAT247Watermark(canvas, image, markType, options);
         break;
       case 'DPCS':
         this.applyDPCSWatermark(canvas, image, markType, options);
         break;
       case 'TT':
-        this.applyTTWatermark(canvas, image, markType);
+        this.applyTTWatermark(canvas, image, markType, options);
         break;
       case 'DPSG':
-        this.applyDPSGWatermark(canvas, image, markType);
+        this.applyDPSGWatermark(canvas, image, markType, options);
         break;
       default:
         throw new Error(`Unsupported brand: ${this.brandConfig.watermarkLogic}`);
@@ -140,13 +140,16 @@ export class WatermarkService {
   /**
    * AT247 specific watermark logic
    */
-  applyAT247Watermark(canvas, image, markType) {
+  applyAT247Watermark(canvas, image, markType, options = {}) {
     const ctx = canvas.getContext('2d');
     const { fixSize } = canvas.metadata;
+    const { skipLogo = false } = options;
     
     const watermarkConfig = this.brandConfig.watermarkTypes.find(t => t.value === markType);
     
     if (!watermarkConfig?.src) {
+      if (skipLogo) return;
+
       // Default watermark - center and corner logos
       const logoCenter = this.preloadedImages.get('logoCenter');
       const logoCorner = this.preloadedImages.get('logoCorner');
@@ -192,10 +195,10 @@ export class WatermarkService {
   applyDPCSWatermark(canvas, image, markType, options = {}) {
     const ctx = canvas.getContext('2d');
     const { isHeightOriented, fixSize, frameRatio } = canvas.metadata;
-    const { insertLogoLeft = true } = options;
+    const { insertLogoLeft = true, skipLogo = false } = options;
 
     // Logo corner (optional)
-    if (insertLogoLeft) {
+    if (insertLogoLeft && !skipLogo) {
       const logoCorner = this.preloadedImages.get('logoCorner');
       if (logoCorner) {
         const ratio = isHeightOriented ? 1 : canvas.height / canvas.width;
@@ -210,7 +213,7 @@ export class WatermarkService {
     }
 
     // Center logo
-    const logoCenter = this.preloadedImages.get('logoCenter');
+    const logoCenter = skipLogo ? null : this.preloadedImages.get('logoCenter');
     if (logoCenter) {
       ctx.drawImage(
         logoCenter,
@@ -250,9 +253,10 @@ export class WatermarkService {
   /**
    * TT specific watermark logic
    */
-  applyTTWatermark(canvas, image, markType) {
+  applyTTWatermark(canvas, image, markType, options = {}) {
     const ctx = canvas.getContext('2d');
     const { isHeightOriented, fixSize } = canvas.metadata;
+    const { skipLogo = false } = options;
     const ratioHeightWidth = isHeightOriented ? 1 : canvas.height / canvas.width;
 
     // Phone number watermark
@@ -278,6 +282,8 @@ export class WatermarkService {
         }
       }
     }
+
+    if (skipLogo) return;
 
     // Corner logo
     const logoCorner = this.preloadedImages.get('logoCorner');
@@ -307,14 +313,15 @@ export class WatermarkService {
   /**
    * DPSG specific watermark logic
    */
-  applyDPSGWatermark(canvas, image, markType) {
+  applyDPSGWatermark(canvas, image, markType, options = {}) {
     if (markType === '200') return; // No watermark
 
     const ctx = canvas.getContext('2d');
     const { fixSize, frameRatio } = canvas.metadata;
+    const { skipLogo = false } = options;
 
-    const logoBottom = this.preloadedImages.get('logoBottom');
-    const center = this.preloadedImages.get('center');
+    const logoBottom = skipLogo ? null : this.preloadedImages.get('logoBottom');
+    const center = skipLogo ? null : this.preloadedImages.get('center');
     const number = this.preloadedImages.get('number');
 
     if (markType === '0') {
